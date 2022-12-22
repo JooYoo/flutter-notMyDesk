@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_not_my_desk/pages/about_page.dart';
 import 'package:flutter_not_my_desk/pages/home_page.dart';
+import 'package:flutter_not_my_desk/widgets/side_nav.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,12 +41,19 @@ class _NavBarState extends State<NavBar> {
     });
   }
 
-  // collect of pages
+  // collection of pages
   final List<Widget> _pages = [const HomePage(), const AboutPage()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("3rd Floor"),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        elevation: 0,
+      ),
+      drawer: SideDrawer(),
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
