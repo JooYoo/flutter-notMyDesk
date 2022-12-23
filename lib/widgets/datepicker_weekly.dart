@@ -14,7 +14,7 @@ class _DatePickerWeeklyState extends State<DatePickerWeekly> {
     return Container(
       margin: const EdgeInsets.only(top: 20, left: 16, bottom: 12),
       child: DatePicker(
-        // TODO: start-day should be this week Monday
+        // TODO: start-day should be current week Monday
         DateTime.now().subtract(Duration(days: 1)),
         height: 100,
         width: 48,
