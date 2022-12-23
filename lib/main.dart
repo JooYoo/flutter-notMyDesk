@@ -67,11 +67,17 @@ class _NavBarState extends State<NavBar> {
         currentIndex: _selectedIndex,
         onTap: _navigateBottomBar,
         type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.black.withOpacity(0.4),
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined), label: 'Home'),
+            icon: Icon(Icons.home_outlined),
+            label: 'Home',
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.info_outline), label: 'About'),
+            icon: Icon(Icons.info_outline),
+            label: 'About',
+          ),
         ],
       ),
     );
