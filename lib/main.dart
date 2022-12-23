@@ -42,13 +42,21 @@ class _NavBarState extends State<NavBar> {
   }
 
   // collection of pages
-  final List<Widget> _pages = [const HomePage(), const AboutPage()];
+  final List<Widget> _pages = [HomePage(), const AboutPage()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("3rd Floor"),
+        actions: [
+          IconButton(
+              icon: const Icon(Icons.more_vert),
+              onPressed: () {
+                print("settings pressed");
+              })
+        ],
+        centerTitle: true,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
