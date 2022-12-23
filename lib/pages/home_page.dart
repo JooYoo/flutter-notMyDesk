@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_not_my_desk/pages/datepicker_weekly.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -11,23 +12,28 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: DefaultTabController(
+    return DefaultTabController(
       length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
-          title: const TabBar(
+      child: Column(
+        children: [
+          // ignore: prefer_const_constructors
+          Flexible(
+            flex: 1,
+            child: const DatePickerWeekly(),
+          ),
+          const TabBar(
             labelColor: Colors.black,
             tabs: [
               Tab(text: 'LEFT'),
               Tab(text: 'RIGHT'),
             ],
           ),
-        ),
-        body: TabBarView(children: _rooms),
+          Flexible(
+            flex: 3,
+            child: TabBarView(children: _rooms),
+          ),
+        ],
       ),
-    ));
+    );
   }
 }
