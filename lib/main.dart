@@ -69,6 +69,8 @@ class _NavBarState extends State<NavBar> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.black.withOpacity(0.4),
+        backgroundColor: Colors.white,
+        elevation: 0.0,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
