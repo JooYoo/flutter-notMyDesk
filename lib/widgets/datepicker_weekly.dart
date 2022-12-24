@@ -12,7 +12,7 @@ class _DatePickerWeeklyState extends State<DatePickerWeekly> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 20, left: 16, bottom: 12),
+      margin: const EdgeInsets.only(top: 8, left: 16, bottom: 12),
       child: DatePicker(
         // TODO: start-day should be current week Monday
         DateTime.now().subtract(Duration(days: 1)),

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_not_my_desk/widgets/datepicker_weekly.dart';
+import '../widgets/bottom_sheet_button.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
   // left/right content
   final List<Widget> _rooms = [
-    const Center(child: Text("left seats")),
+    const Center(child: BottomSheetButton()),
     const Center(child: Text("right seats"))
   ];
 
@@ -16,11 +17,13 @@ class HomePage extends StatelessWidget {
       length: 2,
       child: Column(
         children: [
-          // TODO: try to change the bg to white
           // ignore: prefer_const_constructors
           Flexible(
             flex: 1,
-            child: const DatePickerWeekly(),
+            child: Container(
+              color: Colors.white,
+              child: const DatePickerWeekly(),
+            ),
           ),
           const TabBar(
             labelColor: Colors.black,

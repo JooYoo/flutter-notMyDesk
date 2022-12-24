@@ -18,7 +18,6 @@ class _SideDrawerState extends State<SideDrawer> {
         children: [
           const DrawerHeader(
             child: Align(
-              alignment: Alignment.bottomLeft,
               child: Text(
                 'L O G O',
                 style: TextStyle(fontSize: 40),
