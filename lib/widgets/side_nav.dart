@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_not_my_desk/models/Floor.dart';
 
 class SideDrawer extends StatefulWidget {
   const SideDrawer({
@@ -10,6 +11,19 @@ class SideDrawer extends StatefulWidget {
 }
 
 class _SideDrawerState extends State<SideDrawer> {
+  // collection of floors
+  var floors = [
+    Floor(3, "3rd Floor", "2022-12-24"),
+    Floor(4, "4th Floor", "2022-12-24"),
+    Floor(5, "5th Floor", "2022-12-24")
+  ];
+
+  // switch Floor to get selected-floor
+  void switchFloor(Floor selectedFloor) {
+    // TODO: emit selected-floor to parent-widget
+    print(selectedFloor.floorName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -24,36 +38,17 @@ class _SideDrawerState extends State<SideDrawer> {
               ),
             ),
           ),
-          ListTile(
-            // ignore: prefer_const_constructors
-            title: Text(
-              '5th Floor',
-              style: const TextStyle(fontSize: 20),
-            ),
-            onTap: () {
-              print("selected 5th");
-            },
-          ),
-          ListTile(
-            // ignore: prefer_const_constructors
-            title: Text(
-              '4th Floor',
-              style: const TextStyle(fontSize: 20),
-            ),
-            onTap: () {
-              print("selected 4th");
-            },
-          ),
-          ListTile(
-            // ignore: prefer_const_constructors
-            title: Text(
-              '3rd Floor',
-              style: const TextStyle(fontSize: 20),
-            ),
-            onTap: () {
-              print("selected 3rd");
-            },
-          ),
+          for (var floor in floors) // iterate floors
+            ListTile(
+              // ignore: prefer_const_constructors
+              title: Text(
+                floor.floorName,
+                style: const TextStyle(fontSize: 20),
+              ),
+              onTap: () {
+                switchFloor(floor);
+              },
+            )
         ],
       ),
     );

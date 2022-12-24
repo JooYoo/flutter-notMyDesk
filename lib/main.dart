@@ -63,6 +63,8 @@ class _NavBarState extends State<NavBar> {
       ),
       drawer: SideDrawer(),
       body: _pages[_selectedIndex],
+      // FIXME: refactor to independent widget
+      // BottomNav() emit _selectedIndex
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _navigateBottomBar,
