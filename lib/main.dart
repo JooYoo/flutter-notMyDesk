@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_not_my_desk/pages/about_page.dart';
 import 'package:flutter_not_my_desk/pages/home_page.dart';
 import 'package:flutter_not_my_desk/widgets/side_nav.dart';
+import 'models/Floor.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,23 +33,42 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
-  int _selectedIndex = 0;
+  int _selectedNavIndex = 0;
 
   // onTap to set selected-index
   void _navigateBottomBar(int index) {
     setState(() {
-      _selectedIndex = index;
+      _selectedNavIndex = index;
     });
   }
 
   // collection of pages
   final List<Widget> _pages = [HomePage(), const AboutPage()];
 
+  // data store
+  List<Floor> floors = [
+    Floor(3, "3rd Floor", "2022-12-24"),
+    Floor(4, "4th Floor", "2022-12-24"),
+    Floor(5, "5th Floor", "2022-12-24")
+  ];
+
+  /* ---------------------------- data-store: Floor ---------------------------- */
+  // TODO: define in init life-cycle hook
+  // selected-floor
+  String selectedFloorName = "3rd Floor";
+  // switch floor
+  Floor switchFloor(Floor selectedFloor) {
+    setState(() {
+      selectedFloorName = selectedFloor.floorName;
+    });
+    return selectedFloor;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("3rd Floor"),
+        title: Text(selectedFloorName),
         actions: [
           IconButton(
               icon: const Icon(Icons.more_vert),
@@ -61,12 +81,16 @@ class _NavBarState extends State<NavBar> {
         foregroundColor: Colors.black,
         elevation: 0,
       ),
-      drawer: SideDrawer(),
-      body: _pages[_selectedIndex],
+      drawer: SideDrawer(
+        floors: floors,
+        selectedFloorName: selectedFloorName,
+        switchFloor: switchFloor,
+      ),
+      body: _pages[_selectedNavIndex],
       // FIXME: refactor to independent widget
-      // BottomNav() emit _selectedIndex
+      // BottomNav() emit _selectedNavIndex
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
+        currentIndex: _selectedNavIndex,
         onTap: _navigateBottomBar,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.black,
