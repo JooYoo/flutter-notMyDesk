@@ -94,8 +94,8 @@ class _NavBarState extends State<NavBar> {
         selectedFloor: selectedFloor,
         switchFloor: switchFloor,
       ),
-      body: _pages[_selectedNavIndex],
       // FIXME: refactor to independent widget
+      body: _pages[_selectedNavIndex],
       // BottomNav() emit _selectedNavIndex
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedNavIndex,

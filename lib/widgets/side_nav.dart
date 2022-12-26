@@ -3,11 +3,11 @@ import 'package:flutter_not_my_desk/models/Floor.dart';
 
 class SideDrawer extends StatefulWidget {
   // props
-  final List<Floor> floors;
-  final Floor selectedFloor;
-  final Function switchFloor;
+  List<Floor> floors;
+  Floor selectedFloor;
+  Function switchFloor;
 
-  const SideDrawer(
+  SideDrawer(
       {Key? key,
       required this.floors,
       required this.selectedFloor,
@@ -42,6 +42,9 @@ class _SideDrawerState extends State<SideDrawer> {
               onTap: () {
                 widget.switchFloor(floor);
               },
+              tileColor: (widget.selectedFloor.id == floor.id)
+                  ? Colors.grey[300]
+                  : Colors.transparent,
             )
         ],
       ),
