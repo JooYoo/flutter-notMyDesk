@@ -3,14 +3,14 @@ import 'package:flutter_not_my_desk/models/Floor.dart';
 
 class SideDrawer extends StatefulWidget {
   // props
-  final List<Floor> floors; // TODO: re-order decending
-  final String selectedFloorName;
+  final List<Floor> floors;
+  final Floor selectedFloor;
   final Function switchFloor;
 
   const SideDrawer(
       {Key? key,
       required this.floors,
-      required this.selectedFloorName,
+      required this.selectedFloor,
       required this.switchFloor})
       : super(key: key);
 
@@ -28,7 +28,7 @@ class _SideDrawerState extends State<SideDrawer> {
           DrawerHeader(
             child: Align(
               child: Text(
-                widget.selectedFloorName,
+                widget.selectedFloor.floorName,
                 style: const TextStyle(fontSize: 40),
               ),
             ),

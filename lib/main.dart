@@ -33,9 +33,8 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
-  int _selectedNavIndex = 0;
-
   // onTap to set selected-index
+  int _selectedNavIndex = 0;
   void _navigateBottomBar(int index) {
     setState(() {
       _selectedNavIndex = index;
@@ -46,29 +45,38 @@ class _NavBarState extends State<NavBar> {
   final List<Widget> _pages = [HomePage(), const AboutPage()];
 
   // data store
-  List<Floor> floors = [
+  final List<Floor> floors = [
     Floor(3, "3rd Floor", "2022-12-24"),
     Floor(4, "4th Floor", "2022-12-24"),
     Floor(5, "5th Floor", "2022-12-24")
   ];
 
   /* ---------------------------- data-store: Floor ---------------------------- */
-  // TODO: define in init life-cycle hook
   // selected-floor
-  String selectedFloorName = "3rd Floor";
+  late Floor selectedFloor;
   // switch floor
-  Floor switchFloor(Floor selectedFloor) {
+  void switchFloor(Floor clickedFloor) {
     setState(() {
-      selectedFloorName = selectedFloor.floorName;
+      selectedFloor = clickedFloor;
     });
-    return selectedFloor;
+    print('switch floor to: ${selectedFloor.floorName}');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // sort floors descending
+    floors.sort((a, b) => b.id.compareTo(a.id));
+    // set default selected-floor to 3rd-floor
+    switchFloor(floors.last);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(selectedFloorName),
+        title: Text(selectedFloor.floorName),
         actions: [
           IconButton(
               icon: const Icon(Icons.more_vert),
@@ -83,7 +91,7 @@ class _NavBarState extends State<NavBar> {
       ),
       drawer: SideDrawer(
         floors: floors,
-        selectedFloorName: selectedFloorName,
+        selectedFloor: selectedFloor,
         switchFloor: switchFloor,
       ),
       body: _pages[_selectedNavIndex],
