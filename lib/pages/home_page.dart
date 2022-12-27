@@ -23,6 +23,15 @@ class _HomePageState extends State<HomePage> {
   // left/right room widgets
   late List<Widget> _rooms;
 
+  // switch side when click tap
+  late RoomSide selectedRoomSide;
+  void switchRoomSide(int index) {
+    var selectedSide = index == 0 ? RoomSide.left : RoomSide.right;
+    setState(() {
+      selectedRoomSide = selectedSide;
+    });
+  }
+
   // left-room seats
   late List<Seat> leftSeats;
 
@@ -31,10 +40,10 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     // ✅ get selected-floor
-    // TODO: get room-side
+    // ✅ default room-side: left
+    selectedRoomSide = RoomSide.left;
     // TODO: get seats by room-side
     leftSeats = getSelectedFloorLeftSeats(widget.selectedFloor, RoomSide.left);
-    inspect(leftSeats);
 
     /* --------------------------------- init UI -------------------------------- */
     _rooms = [
@@ -57,7 +66,7 @@ class _HomePageState extends State<HomePage> {
               child: const DatePickerWeekly(),
             ),
           ),
-          const TabBar(
+          TabBar(
             labelColor: Colors.black,
             indicator: BoxDecoration(
               border: Border(
@@ -67,10 +76,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            tabs: [
+            tabs: const [
               Tab(text: 'LEFT'),
               Tab(text: 'RIGHT'),
             ],
+            onTap: (index) {
+              switchRoomSide(index);
+            },
           ),
           Flexible(
             flex: 3,
