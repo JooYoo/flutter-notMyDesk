@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
 import 'package:flutter_not_my_desk/pages/about_page.dart';
 import 'package:flutter_not_my_desk/pages/home_page.dart';
+import 'package:flutter_not_my_desk/services/time_manager.dart';
 import 'package:flutter_not_my_desk/services/weekly_floor_manager.dart';
 import 'package:flutter_not_my_desk/widgets/side_nav.dart';
 import 'models/Floor.dart';
@@ -49,12 +50,8 @@ class _NavBarState extends State<NavBar> {
   final List<Widget> _pages = [HomePage(), const AboutPage()];
 
   /* ---------------------------- data-store: Floor ---------------------------- */
-  // FIXME: floors for side_nav
-  final List<Floor> floors = [
-    Floor(3, "3rd Floor", "2022-12-24"),
-    Floor(4, "4th Floor", "2022-12-24"),
-    Floor(5, "5th Floor", "2022-12-24")
-  ];
+  // selected-floors based on full-date
+  late List<Floor> selectedDateFloors;
   // selected-floor
   late Floor selectedFloor;
   // switch floor
@@ -64,32 +61,27 @@ class _NavBarState extends State<NavBar> {
     });
   }
 
-  // get selected-date-floors
-  // List<Floor> getSelectedDateFloors(
-  //   List<WeeklyDateObj> weeklyDateObjs,
-  //   String selectedFullDate,
-  // ) {
-  //   // find the weekly-date-obj based on selected-full-date
-  //   var selectedDateWeeklyDateObj = weeklyDateObjs.firstWhere(
-  //     (weeklyDateobj) => weeklyDateobj.fullDate == selectedFullDate,
-  //   );
-  // }
-
   /* ---------------------- data-store: weekly-date-objs ---------------------- */
-  List<WeeklyDateObj> weeklyDateObjs = generateWeeklyDateObjs([3, 4, 5]);
+  late List<WeeklyDateObj> weeklyDateObjs;
+  void initSelectedDateFloors() {
+    // get main current-week-date-objs
+    weeklyDateObjs = generateWeeklyDateObjs([3, 4, 5]);
+    // get today-full-date
+    String currentFullDate = getCurrentFullDate();
+    // get selected-date floors
+    selectedDateFloors = getSelectedDateFloors(
+      weeklyDateObjs,
+      currentFullDate,
+    );
+    // set default selected-floor to 3rd-floor
+    switchFloor(selectedDateFloors.last);
+  }
 
   @override
   void initState() {
     super.initState();
-
-    // TODO: get main data-store
-    inspect(weeklyDateObjs);
-
-    // FIXME:
-    // sort floors descending
-    floors.sort((a, b) => b.id.compareTo(a.id));
-    // set default selected-floor to 3rd-floor
-    switchFloor(floors.last);
+    // set floors based on current-date
+    initSelectedDateFloors();
   }
 
   @override
@@ -110,7 +102,7 @@ class _NavBarState extends State<NavBar> {
         elevation: 0,
       ),
       drawer: SideDrawer(
-        floors: floors,
+        floors: selectedDateFloors,
         selectedFloor: selectedFloor,
         switchFloor: switchFloor,
       ),

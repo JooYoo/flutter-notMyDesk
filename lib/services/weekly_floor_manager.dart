@@ -2,7 +2,10 @@ import 'package:flutter_not_my_desk/models/Floor.dart';
 import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
 import 'package:flutter_not_my_desk/services/seat_manager.dart';
 import 'package:flutter_not_my_desk/services/time_manager.dart';
+import 'dart:developer';
 
+// floorId -> floorName
+// e.g. 3 -> '3rd Floor'
 String calcFloorNameEn(int floorId) {
   var floorName = "";
   switch (floorId) {
@@ -21,6 +24,7 @@ String calcFloorNameEn(int floorId) {
   return floorName;
 }
 
+// generate weekly-date-objs
 List<WeeklyDateObj> generateWeeklyDateObjs(List<int> floorIDs) {
   List<WeeklyDateObj> weeklyDateObjs = [];
 
@@ -30,7 +34,7 @@ List<WeeklyDateObj> generateWeeklyDateObjs(List<int> floorIDs) {
   for (var weeklyDate in weeklyDates) {
     var fullDate = calcFullDate(weeklyDate);
 
-    // TODO: generate floors (x3) for each day
+    // generate floors (x3) for each day
     List<Floor> dailyFloors = [];
     for (var floorId in floorIDs) {
       var floorName = calcFloorNameEn(floorId);
@@ -48,4 +52,21 @@ List<WeeklyDateObj> generateWeeklyDateObjs(List<int> floorIDs) {
   }
 
   return weeklyDateObjs;
+}
+
+// get selected-date-floors
+List<Floor> getSelectedDateFloors(
+  List<WeeklyDateObj> weeklyDateObjs,
+  String selectedFullDate,
+) {
+  // find the weekly-date-obj based on selected-full-date
+  var selectedDateWeeklyDateObj = weeklyDateObjs.firstWhere(
+    (weeklyDateobj) => weeklyDateobj.fullDate == selectedFullDate,
+  );
+  // get selected-date-floors
+  var selectedDateFloors = selectedDateWeeklyDateObj.floors;
+  // sort floors descending
+  selectedDateFloors.sort(((a, b) => b.id.compareTo(a.id)));
+
+  return selectedDateFloors;
 }
