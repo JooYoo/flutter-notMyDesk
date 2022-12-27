@@ -1,15 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_not_my_desk/models/Seat.dart';
+import 'package:flutter_not_my_desk/services/seat_manager.dart';
 import 'package:flutter_not_my_desk/widgets/datepicker_weekly.dart';
+import '../models/Floor.dart';
 import '../widgets/bottom_sheet_button.dart';
+import 'dart:developer';
 
-class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  // props
+  Floor selectedFloor;
 
-  // left/right content
-  final List<Widget> _rooms = [
-    const Center(child: BottomSheetButton()),
-    const Center(child: Text("right seats"))
-  ];
+  HomePage({
+    Key? key,
+    required this.selectedFloor,
+  }) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  // left/right room widgets
+  late List<Widget> _rooms;
+
+  // left-room seats
+  late List<Seat> leftSeats;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // ✅ get selected-floor
+    // TODO: get room-side
+    // TODO: get seats by room-side
+    leftSeats = getSelectedFloorLeftSeats(widget.selectedFloor, RoomSide.left);
+    inspect(leftSeats);
+
+    /* --------------------------------- init UI -------------------------------- */
+    _rooms = [
+      const Center(child: BottomSheetButton()),
+      const Center(child: Text("right seats"))
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -4,6 +4,7 @@ import 'package:flutter_not_my_desk/pages/about_page.dart';
 import 'package:flutter_not_my_desk/pages/home_page.dart';
 import 'package:flutter_not_my_desk/services/time_manager.dart';
 import 'package:flutter_not_my_desk/services/weekly_floor_manager.dart';
+import 'package:flutter_not_my_desk/widgets/appbar_settings_button.dart';
 import 'package:flutter_not_my_desk/widgets/side_nav.dart';
 import 'models/Floor.dart';
 import 'dart:developer';
@@ -47,7 +48,7 @@ class _NavBarState extends State<NavBar> {
   }
 
   // collection of pages
-  final List<Widget> _pages = [HomePage(), const AboutPage()];
+  late List<Widget> _pages;
 
   /* ---------------------------- data-store: Floor ---------------------------- */
   // selected-floors based on full-date
@@ -82,6 +83,12 @@ class _NavBarState extends State<NavBar> {
     super.initState();
     // set floors based on current-date
     initSelectedDateFloors();
+
+    // bottom navbar corresponding page
+    _pages = [
+      HomePage(selectedFloor: selectedFloor),
+      const AboutPage(),
+    ];
   }
 
   @override
@@ -89,13 +96,7 @@ class _NavBarState extends State<NavBar> {
     return Scaffold(
       appBar: AppBar(
         title: Text(selectedFloor.floorName),
-        actions: [
-          IconButton(
-              icon: const Icon(Icons.more_vert),
-              onPressed: () {
-                print("settings pressed");
-              })
-        ],
+        actions: const [AppBarSettingsButton()],
         centerTitle: true,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
@@ -106,9 +107,7 @@ class _NavBarState extends State<NavBar> {
         selectedFloor: selectedFloor,
         switchFloor: switchFloor,
       ),
-      // FIXME: refactor to independent widget
       body: _pages[_selectedNavIndex],
-      // BottomNav() emit _selectedNavIndex
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedNavIndex,
         onTap: _navigateBottomBar,
