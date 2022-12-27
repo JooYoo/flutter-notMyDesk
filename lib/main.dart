@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
 import 'package:flutter_not_my_desk/pages/about_page.dart';
 import 'package:flutter_not_my_desk/pages/home_page.dart';
+import 'package:flutter_not_my_desk/services/weekly_floor_manager.dart';
 import 'package:flutter_not_my_desk/widgets/side_nav.dart';
 import 'models/Floor.dart';
+import 'dart:developer';
 
 void main() {
   runApp(const MyApp());
@@ -33,6 +36,7 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
+  /* ------------------------------- view-store ------------------------------- */
   // onTap to set selected-index
   int _selectedNavIndex = 0;
   void _navigateBottomBar(int index) {
@@ -44,14 +48,13 @@ class _NavBarState extends State<NavBar> {
   // collection of pages
   final List<Widget> _pages = [HomePage(), const AboutPage()];
 
-  // data store
+  /* ---------------------------- data-store: Floor ---------------------------- */
+  // FIXME: floors for side_nav
   final List<Floor> floors = [
     Floor(3, "3rd Floor", "2022-12-24"),
     Floor(4, "4th Floor", "2022-12-24"),
     Floor(5, "5th Floor", "2022-12-24")
   ];
-
-  /* ---------------------------- data-store: Floor ---------------------------- */
   // selected-floor
   late Floor selectedFloor;
   // switch floor
@@ -59,13 +62,30 @@ class _NavBarState extends State<NavBar> {
     setState(() {
       selectedFloor = clickedFloor;
     });
-    print('switch floor to: ${selectedFloor.floorName}');
   }
+
+  // get selected-date-floors
+  // List<Floor> getSelectedDateFloors(
+  //   List<WeeklyDateObj> weeklyDateObjs,
+  //   String selectedFullDate,
+  // ) {
+  //   // find the weekly-date-obj based on selected-full-date
+  //   var selectedDateWeeklyDateObj = weeklyDateObjs.firstWhere(
+  //     (weeklyDateobj) => weeklyDateobj.fullDate == selectedFullDate,
+  //   );
+  // }
+
+  /* ---------------------- data-store: weekly-date-objs ---------------------- */
+  List<WeeklyDateObj> weeklyDateObjs = generateWeeklyDateObjs([3, 4, 5]);
 
   @override
   void initState() {
     super.initState();
 
+    // TODO: get main data-store
+    inspect(weeklyDateObjs);
+
+    // FIXME:
     // sort floors descending
     floors.sort((a, b) => b.id.compareTo(a.id));
     // set default selected-floor to 3rd-floor
