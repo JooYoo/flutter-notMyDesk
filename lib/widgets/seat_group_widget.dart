@@ -22,9 +22,9 @@ class _SeatGroupWidgetState extends State<SeatGroupWidget> {
       child: Wrap(
         direction: Axis.horizontal,
         alignment: WrapAlignment.start,
-        spacing: 20,
+        spacing: 10,
         children: [
-          // TODO: iterate seats of a group
+          // iterate seats of a group
           for (var seat in widget.seats)
             SeatWidget(
               seat: seat,

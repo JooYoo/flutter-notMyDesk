@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_not_my_desk/models/Seat.dart';
 import 'package:flutter_not_my_desk/services/seat_manager.dart';
 import 'package:flutter_not_my_desk/widgets/datepicker_weekly.dart';
-import 'package:flutter_not_my_desk/widgets/seat_group_widget.dart';
-import '../models/Floor.dart';
-import '../widgets/seat_widget.dart';
+import 'package:flutter_not_my_desk/widgets/room_widget.dart';
+import 'package:flutter_not_my_desk/models/Floor.dart';
 import 'dart:developer';
 
 class HomePage extends StatefulWidget {
@@ -30,19 +28,11 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  // current-room-seat-groups
-  late List<List<Seat>> currentRoomSeatGroups;
-
   @override
   void initState() {
     super.initState();
     // init selected-room-side: left
     selectedRoomSide = RoomSide.left;
-
-    // init room-seat-groups
-    currentRoomSeatGroups =
-        renderSeatGroupsForOneRoom(widget.selectedFloor, selectedRoomSide);
-    inspect(currentRoomSeatGroups);
   }
 
   @override
@@ -70,8 +60,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             tabs: const [
-              Tab(text: 'LEFT'),
-              Tab(text: 'RIGHT'),
+              Tab(text: 'L E F T'),
+              Tab(text: 'R I G H T'),
             ],
             onTap: (index) {
               switchRoomSide(index);
@@ -82,21 +72,15 @@ class _HomePageState extends State<HomePage> {
             child: TabBarView(
               children: [
                 // left-room
-                Center(
-                  child: Wrap(
-                    direction: Axis.horizontal,
-                    alignment: WrapAlignment.start,
-                    spacing: 10,
-                    children: [
-                      // TODO: foreach bottom-sheet-button-group
-                      // for (var seat in leftSeats)
-                      for (var oneGroupSeats in currentRoomSeatGroups)
-                        SeatGroupWidget(seats: oneGroupSeats)
-                    ],
-                  ),
+                RoomWidget(
+                  roomSide: RoomSide.left,
+                  selectedFloor: widget.selectedFloor,
                 ),
                 // right-room
-                Center(child: Text("right seats"))
+                RoomWidget(
+                  roomSide: RoomSide.right,
+                  selectedFloor: widget.selectedFloor,
+                ),
               ],
             ),
           ),

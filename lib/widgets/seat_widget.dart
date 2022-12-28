@@ -17,7 +17,9 @@ class SeatWidget extends StatefulWidget {
 class _SeatWidgetState extends State<SeatWidget> {
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
+    return SizedBox(
+      width: 100,
+      child: OutlinedButton(
         child: Text(widget.seat.deskNr.toString()),
         onPressed: () {
           showModalBottomSheet(
@@ -25,15 +27,23 @@ class _SeatWidgetState extends State<SeatWidget> {
             builder: ((context) => Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    const Spacer(),
                     // TODO: check if data is rerenderable when change date
                     Text(widget.seat.fullDate),
+                    Text(widget.seat.floorName),
+                    Text(widget.seat.side),
+                    Text(widget.seat.deskNr.toString()),
+                    const Spacer(),
                     OutlinedButton(
                       child: const Text('Close'),
                       onPressed: () => Navigator.pop(context),
                     ),
+                    const Spacer(),
                   ],
                 )),
           );
-        });
+        },
+      ),
+    );
   }
 }
