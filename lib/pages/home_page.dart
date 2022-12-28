@@ -20,10 +20,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // left/right room widgets
-  late List<Widget> _rooms;
-
-  // switch side when click tap
+  // switch room when click tab_bar_tabs
   late RoomSide selectedRoomSide;
   void switchRoomSide(int index) {
     var selectedSide = index == 0 ? RoomSide.left : RoomSide.right;
@@ -32,24 +29,19 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  // left-room seats
-  late List<Seat> leftSeats;
+  // current-room-seat-groups
+  late List<List<Seat>> currentRoomSeatGroups;
 
   @override
   void initState() {
     super.initState();
-
-    // ✅ get selected-floor
-    // ✅ default room-side: left
+    // init selected-room-side: left
     selectedRoomSide = RoomSide.left;
-    // TODO: get seats by room-side
-    leftSeats = getSelectedFloorLeftSeats(widget.selectedFloor, RoomSide.left);
 
-    /* --------------------------------- init UI -------------------------------- */
-    _rooms = [
-      const Center(child: BottomSheetButton()),
-      const Center(child: Text("right seats"))
-    ];
+    // init room-seat-groups
+    currentRoomSeatGroups =
+        renderSeatGroupsForOneRoom(widget.selectedFloor, selectedRoomSide);
+    inspect(currentRoomSeatGroups);
   }
 
   @override
@@ -68,7 +60,7 @@ class _HomePageState extends State<HomePage> {
           ),
           TabBar(
             labelColor: Colors.black,
-            indicator: BoxDecoration(
+            indicator: const BoxDecoration(
               border: Border(
                 bottom: BorderSide(
                   width: 1.5,
@@ -86,7 +78,25 @@ class _HomePageState extends State<HomePage> {
           ),
           Flexible(
             flex: 3,
-            child: TabBarView(children: _rooms),
+            child: TabBarView(
+              children: [
+                // left-room
+                Center(
+                  child: Wrap(
+                    direction: Axis.horizontal,
+                    alignment: WrapAlignment.start,
+                    spacing: 10,
+                    children: [
+                      // TODO: foreach bottom-sheet-button-group
+                      // for (var seat in leftSeats)
+                      BottomSheetButton(),
+                    ],
+                  ),
+                ),
+                // right-room
+                Center(child: Text("right seats"))
+              ],
+            ),
           ),
         ],
       ),

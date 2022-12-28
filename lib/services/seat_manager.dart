@@ -23,9 +23,9 @@ List<Seat> generateSeats(int floorId, String floorName, String fullDate) {
   return seats;
 }
 
-// get left-seats from the selected-floor
-// get right-seats from the selected-floor
-List<Seat> getSelectedFloorLeftSeats(Floor selectedFloor, RoomSide roomSide) {
+// get left/right-seats from the selected-floor
+List<Seat> getSelectedFloorSeatsForOneRoom(
+    Floor selectedFloor, RoomSide roomSide) {
   // get selected-floor-seats
   var selectedFloorSeats = selectedFloor.seats;
 
@@ -35,4 +35,49 @@ List<Seat> getSelectedFloorLeftSeats(Floor selectedFloor, RoomSide roomSide) {
   );
 
   return seats.toList();
+}
+
+// gather one-side-seats for ui
+// e.g. [seat, seat, seat...], [2,3...] -> [[seat, seat], [seat, seat, seat]...]
+List<List<Seat>> divideSeatsToGroupsForOneRoom(
+  List<Seat> oneRoomSeats,
+  List<int> eachGroupSeatCounts,
+) {
+  List<List<Seat>> seatGroups = [];
+  // ignore: unused_local_variable
+  var index = 0;
+
+  // iterate each-group-seat-counts
+  // e.g. [6, 6, 4]: 3groups in total, each group contains 6seats, 6seats, 4seats
+  for (var currGroupSeatCount in eachGroupSeatCounts) {
+    // create a new seat-group
+    List<Seat> newSeatGroup = [];
+    for (var i = 0; i < currGroupSeatCount; i++) {
+      newSeatGroup.add(oneRoomSeats[index]);
+      index++;
+    }
+    // [] -> [[seat, seat, seat], [...]]
+    seatGroups.add(newSeatGroup);
+  }
+
+  return seatGroups;
+}
+
+// the main func to prepare seat-groups for UI
+//    - selectedFloor: the floor is selected by clicking side_nav
+//    - roomSide: the room-side is selected by clicking tab_bar_tabs
+// call the func when
+//    - selected-floor is changed
+//    - room-side is changed
+List<List<Seat>> renderSeatGroupsForOneRoom(
+  Floor selectedFloor,
+  RoomSide roomSide,
+) {
+  // get seats for one-side-room from selected-floor
+  var oneRoomSeats = getSelectedFloorSeatsForOneRoom(selectedFloor, roomSide);
+  // divide one-side-room-seats to seat-groups
+  var oneRoomSeatGroups =
+      divideSeatsToGroupsForOneRoom(oneRoomSeats, [6, 6, 4]);
+
+  return oneRoomSeatGroups;
 }
