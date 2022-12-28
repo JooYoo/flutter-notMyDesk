@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_not_my_desk/models/Seat.dart';
 import 'package:flutter_not_my_desk/services/seat_manager.dart';
 import 'package:flutter_not_my_desk/widgets/datepicker_weekly.dart';
+import 'package:flutter_not_my_desk/widgets/seat_group_widget.dart';
 import '../models/Floor.dart';
-import '../widgets/bottom_sheet_button.dart';
+import '../widgets/seat_widget.dart';
 import 'dart:developer';
 
 class HomePage extends StatefulWidget {
@@ -89,7 +90,8 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       // TODO: foreach bottom-sheet-button-group
                       // for (var seat in leftSeats)
-                      BottomSheetButton(),
+                      for (var oneGroupSeats in currentRoomSeatGroups)
+                        SeatGroupWidget(seats: oneGroupSeats)
                     ],
                   ),
                 ),
