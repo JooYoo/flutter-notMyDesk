@@ -4,12 +4,8 @@ import 'package:flutter_not_my_desk/widgets/seat_widget.dart';
 
 class SeatGroupWidget extends StatefulWidget {
   // props
-  List<Seat> seats;
-
-  SeatGroupWidget({
-    Key? key,
-    required this.seats,
-  }) : super(key: key);
+  final List<Seat> seats;
+  const SeatGroupWidget(this.seats, {super.key});
 
   @override
   State<SeatGroupWidget> createState() => _SeatGroupWidgetState();
@@ -27,7 +23,7 @@ class _SeatGroupWidgetState extends State<SeatGroupWidget> {
           // iterate seats of a group
           for (var seat in widget.seats)
             SeatWidget(
-              seat: seat,
+              seat,
             )
         ],
       ),

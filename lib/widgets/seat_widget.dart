@@ -3,12 +3,8 @@ import 'package:flutter_not_my_desk/models/Seat.dart';
 
 class SeatWidget extends StatefulWidget {
   // props
-  Seat seat;
-
-  SeatWidget({
-    Key? key,
-    required this.seat,
-  }) : super(key: key);
+  final Seat seat;
+  const SeatWidget(this.seat, {super.key});
 
   @override
   State<SeatWidget> createState() => _SeatWidgetState();

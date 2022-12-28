@@ -7,36 +7,18 @@ import 'dart:developer';
 
 class HomePage extends StatefulWidget {
   // props
-  Floor selectedFloor;
-
-  HomePage({
-    Key? key,
-    required this.selectedFloor,
-  }) : super(key: key);
+  final Floor selectedFloor;
+  const HomePage(this.selectedFloor, {super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  // switch room when click tab_bar_tabs
-  late RoomSide selectedRoomSide;
-  void switchRoomSide(int index) {
-    var selectedSide = index == 0 ? RoomSide.left : RoomSide.right;
-    setState(() {
-      selectedRoomSide = selectedSide;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    // init selected-room-side: left
-    selectedRoomSide = RoomSide.left;
-  }
-
   @override
   Widget build(BuildContext context) {
+    // TODO: check if update based on parent
+    inspect("home_page rendered");
     return DefaultTabController(
       length: 2,
       child: Column(
@@ -64,7 +46,9 @@ class _HomePageState extends State<HomePage> {
               Tab(text: 'R I G H T'),
             ],
             onTap: (index) {
-              switchRoomSide(index);
+              // TODO: if need
+              // index 0: RoomSide.left
+              // index 1: RoomSide.right
             },
           ),
           Flexible(
@@ -73,13 +57,13 @@ class _HomePageState extends State<HomePage> {
               children: [
                 // left-room
                 RoomWidget(
-                  roomSide: RoomSide.left,
-                  selectedFloor: widget.selectedFloor,
+                  RoomSide.left,
+                  widget.selectedFloor,
                 ),
                 // right-room
                 RoomWidget(
-                  roomSide: RoomSide.right,
-                  selectedFloor: widget.selectedFloor,
+                  RoomSide.right,
+                  widget.selectedFloor,
                 ),
               ],
             ),

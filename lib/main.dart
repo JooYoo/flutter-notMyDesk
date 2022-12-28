@@ -83,16 +83,15 @@ class _NavBarState extends State<NavBar> {
     super.initState();
     // set floors based on current-date
     initSelectedDateFloors();
-
-    // bottom navbar corresponding page
-    _pages = [
-      HomePage(selectedFloor: selectedFloor),
-      const AboutPage(),
-    ];
   }
 
   @override
   Widget build(BuildContext context) {
+    // bottom navbar corresponding page
+    _pages = [
+      HomePage(selectedFloor),
+      const AboutPage(),
+    ];
     return Scaffold(
       appBar: AppBar(
         title: Text(selectedFloor.floorName),

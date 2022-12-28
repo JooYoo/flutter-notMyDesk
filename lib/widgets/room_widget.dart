@@ -3,16 +3,12 @@ import 'package:flutter_not_my_desk/models/Floor.dart';
 import 'package:flutter_not_my_desk/models/Seat.dart';
 import 'package:flutter_not_my_desk/services/seat_manager.dart';
 import 'package:flutter_not_my_desk/widgets/seat_group_widget.dart';
+import 'dart:developer';
 
 class RoomWidget extends StatefulWidget {
-  RoomSide roomSide;
-  Floor selectedFloor;
-
-  RoomWidget({
-    Key? key,
-    required this.roomSide,
-    required this.selectedFloor,
-  }) : super(key: key);
+  final RoomSide roomSide;
+  final Floor selectedFloor;
+  const RoomWidget(this.roomSide, this.selectedFloor, {super.key});
 
   @override
   State<RoomWidget> createState() => _RoomWidgetState();
@@ -22,15 +18,13 @@ class _RoomWidgetState extends State<RoomWidget> {
   late List<List<Seat>> currentRoomSeatGroups;
 
   @override
-  void initState() {
-    super.initState();
-    // init room-seat-groups
+  Widget build(BuildContext context) {
+    // render room-seat-groups
     currentRoomSeatGroups =
         renderSeatGroupsForOneRoom(widget.selectedFloor, widget.roomSide);
-  }
+    // TODO: check if update based on parent
+    inspect("room_widget rendered");
 
-  @override
-  Widget build(BuildContext context) {
     return Center(
       child: Wrap(
         direction: Axis.horizontal,
@@ -43,7 +37,7 @@ class _RoomWidgetState extends State<RoomWidget> {
           for (var oneGroupSeats in currentRoomSeatGroups)
             SizedBox(
               width: oneGroupSeats.length == 4 ? 300 : double.infinity,
-              child: SeatGroupWidget(seats: oneGroupSeats),
+              child: SeatGroupWidget(oneGroupSeats),
             )
         ],
       ),
