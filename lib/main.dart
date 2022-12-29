@@ -64,6 +64,7 @@ class _NavBarState extends State<NavBar> {
 
   /* ---------------------- data-store: weekly-date-objs ---------------------- */
   late List<WeeklyDateObj> weeklyDateObjs;
+  // run only once when app start
   void initSelectedDateFloors() {
     // get main current-week-date-objs
     weeklyDateObjs = generateWeeklyDateObjs([3, 4, 5]);

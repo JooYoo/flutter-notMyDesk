@@ -22,8 +22,6 @@ class _RoomWidgetState extends State<RoomWidget> {
     // render room-seat-groups
     currentRoomSeatGroups =
         renderSeatGroupsForOneRoom(widget.selectedFloor, widget.roomSide);
-    // TODO: check if update based on parent
-    inspect("room_widget rendered");
 
     return Center(
       child: Wrap(

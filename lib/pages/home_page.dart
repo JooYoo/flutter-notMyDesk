@@ -17,12 +17,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    // TODO: check if update based on parent
-    inspect("home_page rendered");
     return DefaultTabController(
       length: 2,
       child: Column(
         children: [
+          // TODO: emit selected-date to get selected-date-floors
           // ignore: prefer_const_constructors
           Flexible(
             flex: 1,
