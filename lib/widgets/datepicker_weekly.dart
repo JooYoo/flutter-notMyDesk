@@ -1,6 +1,8 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_not_my_desk/providers/weekly_date_obj_provider.dart';
 import 'package:flutter_not_my_desk/services/time_manager.dart';
+import 'package:provider/provider.dart';
 
 class DatePickerWeekly extends StatefulWidget {
   const DatePickerWeekly({super.key});
@@ -30,8 +32,9 @@ class _DatePickerWeeklyState extends State<DatePickerWeekly> {
           color: Colors.grey,
         ),
         onDateChange: (date) {
-          // TODO: emit selected-date to get selected-date-floors
-          print(date);
+          // TODO: change selected-date-floors directly
+          context.read<WeeklyDateObjProvider>().selectedFullDate =
+              calcFullDate(date);
         },
       ),
     );

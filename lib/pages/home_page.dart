@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_not_my_desk/providers/weekly_date_obj_provider.dart';
 import 'package:flutter_not_my_desk/services/seat_manager.dart';
 import 'package:flutter_not_my_desk/widgets/datepicker_weekly.dart';
 import 'package:flutter_not_my_desk/widgets/room_widget.dart';
@@ -21,8 +22,6 @@ class _HomePageState extends State<HomePage> {
       length: 2,
       child: Column(
         children: [
-          // TODO: emit selected-date to get selected-date-floors
-          // ignore: prefer_const_constructors
           Flexible(
             flex: 1,
             child: Container(
