@@ -31,8 +31,22 @@ class WeeklyDateObjProvider extends ChangeNotifier {
     defaultCurrentFullDate,
   ).last;
   Floor get selectedFloor => _selectedFloor;
-  set selectedFloor(Floor val) {
-    _selectedFloor = val;
+
+  /* --------------------------------- methods -------------------------------- */
+  // set current floor by selected-date, floor-id
+  void setSelectedFloorBy(
+    List<WeeklyDateObj> weeklyDateObjs,
+    String selectedFullDate,
+    int floorId,
+  ) {
+    // set new selected-full-date
+    _selectedFullDate = selectedFullDate;
+    // set selected-floor by weekly-date-objs and full-date
+    _selectedFloor = getSelectedDateIdFloor(
+      weeklyDateObjs,
+      selectedFullDate,
+      floorId,
+    );
     notifyListeners();
   }
 }

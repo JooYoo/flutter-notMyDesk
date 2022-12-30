@@ -41,7 +41,12 @@ class _SideDrawerState extends State<SideDrawer> {
                 style: const TextStyle(fontSize: 20),
               ),
               onTap: () {
-                context.read<WeeklyDateObjProvider>().selectedFloor = floor;
+                // set floor by selected-date, floor-id
+                context.read<WeeklyDateObjProvider>().setSelectedFloorBy(
+                      weeklyDateObjs,
+                      selectedFullDate,
+                      floor.id,
+                    );
               },
               tileColor: (widget.selectedFloor.id == floor.id)
                   ? Colors.grey[300]

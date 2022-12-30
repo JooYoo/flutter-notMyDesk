@@ -70,3 +70,20 @@ List<Floor> getSelectedDateFloors(
 
   return selectedDateFloors;
 }
+
+// get floor by selected-date, selected-floorId
+Floor getSelectedDateIdFloor(
+  List<WeeklyDateObj> weeklyDateObjs,
+  String selectedFullDate,
+  int floorId,
+) {
+  // find the weekly-date-obj based on selected-full-date
+  var selectedDateWeeklyDateObj = weeklyDateObjs.firstWhere(
+    (weeklyDateobj) => weeklyDateobj.fullDate == selectedFullDate,
+  );
+  // get selected-floor by floorId
+  var selectedFloorIdFloor = selectedDateWeeklyDateObj.floors
+      .firstWhere((floor) => floor.id == floorId);
+
+  return selectedFloorIdFloor;
+}

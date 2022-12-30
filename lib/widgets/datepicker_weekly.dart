@@ -14,6 +14,10 @@ class DatePickerWeekly extends StatefulWidget {
 class _DatePickerWeeklyState extends State<DatePickerWeekly> {
   @override
   Widget build(BuildContext context) {
+    // watch states
+    var floorId = context.watch<WeeklyDateObjProvider>().selectedFloor.id;
+    var weeklyDateObjs = context.watch<WeeklyDateObjProvider>().weeklyDateObjs;
+
     return Container(
       margin: const EdgeInsets.only(top: 8, left: 16, bottom: 12),
       child: DatePicker(
@@ -32,9 +36,13 @@ class _DatePickerWeeklyState extends State<DatePickerWeekly> {
           color: Colors.grey,
         ),
         onDateChange: (date) {
-          // TODO: change selected-date-floors directly
-          context.read<WeeklyDateObjProvider>().selectedFullDate =
-              calcFullDate(date);
+          var selectedFullDate = calcFullDate(date);
+          // set floor by selected-date, floor-id
+          context.read<WeeklyDateObjProvider>().setSelectedFloorBy(
+                weeklyDateObjs,
+                selectedFullDate,
+                floorId,
+              );
         },
       ),
     );
