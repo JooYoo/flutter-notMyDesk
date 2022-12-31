@@ -16,8 +16,6 @@ class _SeatGroupWidgetState extends State<SeatGroupWidget> {
   Widget build(BuildContext context) {
     return Center(
       child: Wrap(
-        direction: Axis.horizontal,
-        alignment: WrapAlignment.start,
         spacing: 10,
         children: [
           // iterate seats of a group

@@ -19,34 +19,37 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         children: [
           Flexible(
-            flex: 1,
+            flex: 5,
             child: Container(
               color: Colors.white,
               child: const DatePickerWeekly(),
             ),
           ),
-          TabBar(
-            labelColor: Colors.black,
-            indicator: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  width: 1.5,
-                  color: Colors.black,
+          Flexible(
+            flex: 2,
+            child: TabBar(
+              labelColor: Colors.black,
+              indicator: const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    width: 1.5,
+                    color: Colors.black,
+                  ),
                 ),
               ),
+              tabs: const [
+                Tab(text: 'L E F T'),
+                Tab(text: 'R I G H T'),
+              ],
+              onTap: (index) {
+                // TODO: if need
+                // index 0: RoomSide.left
+                // index 1: RoomSide.right
+              },
             ),
-            tabs: const [
-              Tab(text: 'L E F T'),
-              Tab(text: 'R I G H T'),
-            ],
-            onTap: (index) {
-              // TODO: if need
-              // index 0: RoomSide.left
-              // index 1: RoomSide.right
-            },
           ),
           const Flexible(
-            flex: 3,
+            flex: 15,
             child: TabBarView(
               children: [
                 // left-room

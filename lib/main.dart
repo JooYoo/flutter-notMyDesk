@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_not_my_desk/pages/about_page.dart';
 import 'package:flutter_not_my_desk/pages/home_page.dart';
 import 'package:flutter_not_my_desk/providers/weekly_date_obj_provider.dart';
@@ -8,10 +9,18 @@ import 'package:provider/provider.dart';
 import 'dart:developer';
 
 void main() {
-  runApp(ChangeNotifierProvider<WeeklyDateObjProvider>(
-    child: const MyApp(),
-    create: (_) => WeeklyDateObjProvider(),
-  ));
+  // portait-up only
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(
+      // provider: share state globally
+      ChangeNotifierProvider<WeeklyDateObjProvider>(
+        child: const MyApp(),
+        create: (_) => WeeklyDateObjProvider(),
+      ),
+    );
+  });
 }
 
 class MyApp extends StatelessWidget {

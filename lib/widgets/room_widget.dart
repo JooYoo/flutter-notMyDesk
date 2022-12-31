@@ -25,20 +25,22 @@ class _RoomWidgetState extends State<RoomWidget> {
         renderSeatGroupsForOneRoom(selectedFloor, widget.roomSide);
 
     return Center(
-      child: Wrap(
-        direction: Axis.horizontal,
-        alignment: widget.roomSide == RoomSide.left
-            ? WrapAlignment.start
-            : WrapAlignment.end,
-        runSpacing: 20,
-        children: [
-          // iterate current-room-seat-groups
-          for (var oneGroupSeats in currentRoomSeatGroups)
-            SizedBox(
-              width: oneGroupSeats.length == 4 ? 300 : double.infinity,
-              child: SeatGroupWidget(oneGroupSeats),
-            )
-        ],
+      child: SingleChildScrollView(
+        child: Wrap(
+          direction: Axis.horizontal,
+          alignment: widget.roomSide == RoomSide.left
+              ? WrapAlignment.start
+              : WrapAlignment.end,
+          runSpacing: 20,
+          children: [
+            // iterate current-room-seat-groups
+            for (var oneGroupSeats in currentRoomSeatGroups)
+              SizedBox(
+                width: oneGroupSeats.length == 4 ? 300 : double.infinity,
+                child: SeatGroupWidget(oneGroupSeats),
+              )
+          ],
+        ),
       ),
     );
   }

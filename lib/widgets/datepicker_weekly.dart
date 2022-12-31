@@ -20,30 +20,32 @@ class _DatePickerWeeklyState extends State<DatePickerWeekly> {
 
     return Container(
       margin: const EdgeInsets.only(top: 8, left: 16, bottom: 12),
-      child: DatePicker(
-        getCurrentWeekMonday(
-          DateTime.now(),
-        ), // start-day should be current week Monday
-        height: 100,
-        width: 48,
-        initialSelectedDate: DateTime.now(), // init selected-date is today
-        daysCount: 7,
-        selectionColor: Colors.black,
-        selectedTextColor: Colors.white,
-        dateTextStyle: const TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-          color: Colors.grey,
+      child: SingleChildScrollView(
+        child: DatePicker(
+          getCurrentWeekMonday(
+            DateTime.now(),
+          ), // start-day should be current week Monday
+          height: 100,
+          width: 48,
+          initialSelectedDate: DateTime.now(), // init selected-date is today
+          daysCount: 7,
+          selectionColor: Colors.black,
+          selectedTextColor: Colors.white,
+          dateTextStyle: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: Colors.grey,
+          ),
+          onDateChange: (date) {
+            var selectedFullDate = calcFullDate(date);
+            // set floor by selected-date, floor-id
+            context.read<WeeklyDateObjProvider>().setSelectedFloorBy(
+                  weeklyDateObjs,
+                  selectedFullDate,
+                  floorId,
+                );
+          },
         ),
-        onDateChange: (date) {
-          var selectedFullDate = calcFullDate(date);
-          // set floor by selected-date, floor-id
-          context.read<WeeklyDateObjProvider>().setSelectedFloorBy(
-                weeklyDateObjs,
-                selectedFullDate,
-                floorId,
-              );
-        },
       ),
     );
   }
