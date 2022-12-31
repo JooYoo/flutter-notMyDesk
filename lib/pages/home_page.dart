@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_not_my_desk/services/seat_manager.dart';
 import 'package:flutter_not_my_desk/widgets/datepicker_weekly.dart';
 import 'package:flutter_not_my_desk/widgets/room_widget.dart';
-import 'package:flutter_not_my_desk/models/Floor.dart';
 import 'dart:developer';
 
 class HomePage extends StatefulWidget {
-  // props
-  final Floor selectedFloor;
-  const HomePage(this.selectedFloor, {super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -48,19 +45,17 @@ class _HomePageState extends State<HomePage> {
               // index 1: RoomSide.right
             },
           ),
-          Flexible(
+          const Flexible(
             flex: 3,
             child: TabBarView(
               children: [
                 // left-room
                 RoomWidget(
                   RoomSide.left,
-                  widget.selectedFloor,
                 ),
                 // right-room
                 RoomWidget(
                   RoomSide.right,
-                  widget.selectedFloor,
                 ),
               ],
             ),

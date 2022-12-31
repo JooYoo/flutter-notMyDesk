@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
 import 'package:flutter_not_my_desk/pages/about_page.dart';
 import 'package:flutter_not_my_desk/pages/home_page.dart';
 import 'package:flutter_not_my_desk/providers/weekly_date_obj_provider.dart';
-import 'package:flutter_not_my_desk/services/time_manager.dart';
-import 'package:flutter_not_my_desk/services/weekly_floor_manager.dart';
 import 'package:flutter_not_my_desk/widgets/appbar_settings_button.dart';
 import 'package:flutter_not_my_desk/widgets/side_nav.dart';
 import 'package:provider/provider.dart';
-import 'models/Floor.dart';
 import 'dart:developer';
 
 void main() {
@@ -61,7 +57,7 @@ class _NavBarState extends State<NavBar> {
 
     // bottom navbar corresponding page
     _pages = [
-      HomePage(selectedFloor),
+      const HomePage(),
       const AboutPage(),
     ];
 
@@ -74,9 +70,7 @@ class _NavBarState extends State<NavBar> {
         foregroundColor: Colors.black,
         elevation: 0,
       ),
-      drawer: SideDrawer(
-        selectedFloor: selectedFloor,
-      ),
+      drawer: const SideDrawer(),
       body: _pages[_selectedNavIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedNavIndex,

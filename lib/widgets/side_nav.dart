@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_not_my_desk/models/Floor.dart';
 import 'package:flutter_not_my_desk/providers/weekly_date_obj_provider.dart';
 import 'package:flutter_not_my_desk/services/weekly_floor_manager.dart';
 import 'package:provider/provider.dart';
 
 class SideDrawer extends StatefulWidget {
-  // props
-  Floor selectedFloor;
-  SideDrawer({Key? key, required this.selectedFloor}) : super(key: key);
+  const SideDrawer({super.key});
 
   @override
   State<SideDrawer> createState() => _SideDrawerState();
@@ -17,6 +14,7 @@ class _SideDrawerState extends State<SideDrawer> {
   @override
   Widget build(BuildContext context) {
     var weeklyDateObjs = context.watch<WeeklyDateObjProvider>().weeklyDateObjs;
+    var selectedFloor = context.watch<WeeklyDateObjProvider>().selectedFloor;
     var selectedFullDate =
         context.watch<WeeklyDateObjProvider>().selectedFullDate;
 
@@ -29,7 +27,7 @@ class _SideDrawerState extends State<SideDrawer> {
           DrawerHeader(
             child: Align(
               child: Text(
-                widget.selectedFloor.floorName,
+                selectedFloor.floorName,
                 style: const TextStyle(fontSize: 40),
               ),
             ),
@@ -48,7 +46,7 @@ class _SideDrawerState extends State<SideDrawer> {
                       floor.id,
                     );
               },
-              tileColor: (widget.selectedFloor.id == floor.id)
+              tileColor: (selectedFloor.id == floor.id)
                   ? Colors.grey[300]
                   : Colors.transparent,
             )

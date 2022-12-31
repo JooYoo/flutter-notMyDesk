@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_not_my_desk/models/Floor.dart';
 import 'package:flutter_not_my_desk/models/Seat.dart';
+import 'package:flutter_not_my_desk/providers/weekly_date_obj_provider.dart';
 import 'package:flutter_not_my_desk/services/seat_manager.dart';
 import 'package:flutter_not_my_desk/widgets/seat_group_widget.dart';
+import 'package:provider/provider.dart';
 import 'dart:developer';
 
 class RoomWidget extends StatefulWidget {
   final RoomSide roomSide;
-  final Floor selectedFloor;
-  const RoomWidget(this.roomSide, this.selectedFloor, {super.key});
+  const RoomWidget(this.roomSide, {super.key});
 
   @override
   State<RoomWidget> createState() => _RoomWidgetState();
@@ -19,9 +19,10 @@ class _RoomWidgetState extends State<RoomWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var selectedFloor = context.watch<WeeklyDateObjProvider>().selectedFloor;
     // render room-seat-groups
     currentRoomSeatGroups =
-        renderSeatGroupsForOneRoom(widget.selectedFloor, widget.roomSide);
+        renderSeatGroupsForOneRoom(selectedFloor, widget.roomSide);
 
     return Center(
       child: Wrap(
