@@ -22,17 +22,22 @@ class _SeatWidgetState extends State<SeatWidget> {
         child: Text(widget.seat.deskNr.toString()),
         onPressed: () {
           showModalBottomSheet(
-              isScrollControlled: true,
               context: context,
+              isScrollControlled: true,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
+              ),
               builder: (context) {
                 final MediaQueryData mediaQueryData = MediaQuery.of(context);
                 return Padding(
                   padding: mediaQueryData.viewInsets,
                   child: Container(
-                    padding: const EdgeInsets.all(16),
+                    height: MediaQuery.of(context).size.height * 0.75,
+                    padding: const EdgeInsets.fromLTRB(20, 48, 20, 32),
                     child: Column(
                       children: [
-                        Spacer(),
                         Container(
                           alignment: Alignment.centerLeft,
                           child: Column(
