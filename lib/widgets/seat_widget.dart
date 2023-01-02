@@ -11,8 +11,16 @@ class SeatWidget extends StatefulWidget {
 }
 
 class _SeatWidgetState extends State<SeatWidget> {
+  // text_field setup
   TextEditingController occupyController = TextEditingController();
   String occupiedBy = '';
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the widget tree
+    occupyController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +43,14 @@ class _SeatWidgetState extends State<SeatWidget> {
                   padding: mediaQueryData.viewInsets,
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.75,
-                    padding: const EdgeInsets.fromLTRB(20, 48, 20, 32),
+                    padding: const EdgeInsets.fromLTRB(20, 62, 20, 32),
                     child: Column(
                       children: [
                         Container(
                           alignment: Alignment.centerLeft,
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
                                 widget.seat.occupied == ''
@@ -52,6 +60,13 @@ class _SeatWidgetState extends State<SeatWidget> {
                                   fontSize: 32,
                                 ),
                               ),
+                              const SizedBox(height: 24),
+                              Text(
+                                "${widget.seat.floorName}・${widget.seat.side}・Desk ${widget.seat.deskNr.toString()}",
+                                style: const TextStyle(
+                                  color: Colors.black54,
+                                ),
+                              ),
                               const SizedBox(height: 8),
                               Text(
                                 widget.seat.fullDate,
@@ -59,36 +74,56 @@ class _SeatWidgetState extends State<SeatWidget> {
                                   color: Colors.black54,
                                 ),
                               ),
-                              const SizedBox(height: 32),
+                              const SizedBox(height: 28),
                               TextField(
                                 controller: occupyController,
                                 onChanged: (value) {
-                                  print(occupiedBy);
+                                  occupiedBy = value;
                                 },
                                 decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
-                                  labelStyle: TextStyle(color: Colors.black),
+                                  labelText: 'New occupy Name',
+                                  labelStyle: TextStyle(
+                                    color: Colors.black45,
+                                  ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Colors.black,
                                     ),
                                   ),
-                                  labelText: 'Occupy Name',
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        Text(
-                          "${widget.seat.floorName}, ${widget.seat.side}, ${widget.seat.deskNr.toString()}",
-                        ),
-                        Spacer(),
+                        const Spacer(),
+                        // save button
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.black,
-                              minimumSize: const Size.fromHeight(50)),
+                            backgroundColor: Colors.black,
+                            minimumSize: const Size.fromHeight(50),
+                          ),
+                          onPressed: () {
+                            // TODO: assign occupy to store
+                            print("✅: ${occupiedBy}");
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Save'),
+                        ),
+                        const SizedBox(height: 8),
+                        // close button
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.black,
+                            backgroundColor: Colors.white,
+                            side: const BorderSide(
+                              width: 1,
+                              color: Colors.black,
+                            ),
+                            minimumSize: const Size.fromHeight(50),
+                          ),
                           onPressed: () => Navigator.pop(context),
-                          child: const Text('Save and close'),
+                          child: const Text('Close'),
                         ),
                       ],
                     ),
