@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_not_my_desk/models/Seat.dart';
+import 'package:flutter_not_my_desk/providers/weekly_date_obj_provider.dart';
+import 'package:provider/provider.dart';
+import 'dart:developer';
 
 class SeatWidget extends StatefulWidget {
   // props
@@ -27,7 +30,9 @@ class _SeatWidgetState extends State<SeatWidget> {
     return SizedBox(
       width: 100,
       child: OutlinedButton(
-        child: Text(widget.seat.deskNr.toString()),
+        child: Text(
+          '${widget.seat.deskNr.toString()}. ${widget.seat.occupied}',
+        ),
         onPressed: () {
           showModalBottomSheet(
               context: context,
@@ -104,8 +109,10 @@ class _SeatWidgetState extends State<SeatWidget> {
                             minimumSize: const Size.fromHeight(50),
                           ),
                           onPressed: () {
-                            // TODO: assign occupy to store
-                            print("✅: ${occupiedBy}");
+                            context.read<WeeklyDateObjProvider>().setOccupyBy(
+                                  widget.seat,
+                                  occupiedBy,
+                                );
                             Navigator.pop(context);
                           },
                           child: const Text('Save'),

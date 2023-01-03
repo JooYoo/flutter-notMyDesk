@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_not_my_desk/models/Floor.dart';
+import 'package:flutter_not_my_desk/models/Seat.dart';
 import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
 import 'package:flutter_not_my_desk/services/time_manager.dart';
 import 'package:flutter_not_my_desk/services/weekly_floor_manager.dart';
@@ -48,5 +49,14 @@ class WeeklyDateObjProvider extends ChangeNotifier {
       floorId,
     );
     notifyListeners();
+  }
+
+  // set seat by: selected-floor, selected-seat, occupiedBy
+  void setOccupyBy(Seat selectedSeat, String newOccupiedBy) {
+    // find target seat from
+    var seat = _selectedFloor.seats!
+        .firstWhere((seat) => seat.deskNr == selectedSeat.deskNr);
+    // set occupy
+    seat.occupied = newOccupiedBy;
   }
 }
