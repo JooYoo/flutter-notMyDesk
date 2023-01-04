@@ -58,5 +58,7 @@ class WeeklyDateObjProvider extends ChangeNotifier {
         .firstWhere((seat) => seat.deskNr == selectedSeat.deskNr);
     // set occupy
     seat.occupied = newOccupiedBy;
+
+    notifyListeners();
   }
 }
