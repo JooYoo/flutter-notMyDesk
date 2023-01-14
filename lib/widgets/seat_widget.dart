@@ -15,13 +15,13 @@ class SeatWidget extends StatefulWidget {
 
 class _SeatWidgetState extends State<SeatWidget> {
   // text_field setup
-  TextEditingController occupyController = TextEditingController();
+  TextEditingController textFieldController = TextEditingController();
   String occupiedBy = '';
 
   @override
   void dispose() {
     // Clean up the controller when the widget is removed from the widget tree
-    occupyController.dispose();
+    textFieldController.dispose();
     super.dispose();
   }
 
@@ -81,7 +81,7 @@ class _SeatWidgetState extends State<SeatWidget> {
                               ),
                               const SizedBox(height: 28),
                               TextField(
-                                controller: occupyController,
+                                controller: textFieldController,
                                 onChanged: (value) {
                                   occupiedBy = value;
                                 },
@@ -109,10 +109,14 @@ class _SeatWidgetState extends State<SeatWidget> {
                             minimumSize: const Size.fromHeight(50),
                           ),
                           onPressed: () {
+                            // TODO: setOccupyBy() should clean textfield
                             context.read<WeeklyDateObjProvider>().setOccupyBy(
                                   widget.seat,
                                   occupiedBy,
                                 );
+                            // clean up text-field-text
+                            textFieldController.clear();
+                            // close modal
                             Navigator.pop(context);
                           },
                           child: const Text('Save'),
@@ -129,7 +133,12 @@ class _SeatWidgetState extends State<SeatWidget> {
                             ),
                             minimumSize: const Size.fromHeight(50),
                           ),
-                          onPressed: () => Navigator.pop(context),
+                          onPressed: () {
+                            // clean up text-field-text
+                            textFieldController.clear();
+                            // close modal
+                            Navigator.pop(context);
+                          },
                           child: const Text('Close'),
                         ),
                       ],
