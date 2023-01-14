@@ -32,6 +32,7 @@ class _SeatWidgetState extends State<SeatWidget> {
       child: OutlinedButton(
         child: Text(
           '${widget.seat.deskNr.toString()}. ${widget.seat.occupied}',
+          style: const TextStyle(color: Colors.black),
         ),
         onPressed: () {
           showModalBottomSheet(
