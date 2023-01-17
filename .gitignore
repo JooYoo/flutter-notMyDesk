@@ -42,3 +42,13 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# env
+# - TODO: flutter
+firebase_options.dart
+# - android
+google-services.json
+# - ios & macos
+firebase_app_id_file.json
+# - ios
+GoogleService-Info.plist
