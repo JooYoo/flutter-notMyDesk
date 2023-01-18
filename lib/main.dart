@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_not_my_desk/pages/about_page.dart';
 import 'package:flutter_not_my_desk/pages/home_page.dart';
 import 'package:flutter_not_my_desk/providers/weekly_date_obj_provider.dart';
@@ -8,7 +9,9 @@ import 'package:flutter_not_my_desk/widgets/side_nav.dart';
 import 'package:provider/provider.dart';
 import 'dart:developer';
 
-void main() {
+Future main() async {
+  // load .env
+  await dotenv.load(fileName: "lib/.env");
   // portait-up only
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
@@ -25,10 +28,12 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    print("✅");
+    var test = dotenv.env['ANDROID_API_KEY'];
+    print(dotenv.env['ANDROID_API_KEY']);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(

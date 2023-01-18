@@ -44,6 +44,7 @@ app.*.map.json
 /android/app/release
 
 # env
+.env
 # - TODO: flutter
 firebase_options.dart
 # - android
