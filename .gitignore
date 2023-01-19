@@ -45,8 +45,6 @@ app.*.map.json
 
 # env
 .env
-# - TODO: flutter
-firebase_options.dart
 # - android
 google-services.json
 # - ios & macos

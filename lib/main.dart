@@ -32,8 +32,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("✅");
-    var test = dotenv.env['ANDROID_API_KEY'];
-    print(dotenv.env['ANDROID_API_KEY']);
+    // print(dotenv.env['ANDROID_API_KEY']);
+    print(dotenv.get("WEB_APP_ID"));
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
