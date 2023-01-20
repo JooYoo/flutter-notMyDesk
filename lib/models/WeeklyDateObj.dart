@@ -7,4 +7,9 @@ class WeeklyDateObj {
   List<Floor> floors;
 
   WeeklyDateObj(this.fullDate, this.floors);
+
+  // Decode fetched data from Firebase
+  // factory WeeklyDateObj.fromSnapshot(){
+  //   return WeeklyDateObj(fullDate, floors)
+  // }
 }
