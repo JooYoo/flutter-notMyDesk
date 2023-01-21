@@ -1,9 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_not_my_desk/pages/about_page.dart';
 import 'package:flutter_not_my_desk/pages/home_page.dart';
 import 'package:flutter_not_my_desk/providers/weekly_date_obj_provider.dart';
+import 'package:flutter_not_my_desk/repository/weeklyDateObj_repository.dart';
 import 'package:flutter_not_my_desk/widgets/appbar_settings_button.dart';
 import 'package:flutter_not_my_desk/widgets/side_nav.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +14,12 @@ import 'dart:developer';
 Future main() async {
   // load .env
   await dotenv.load(fileName: "lib/.env");
+  // init firebase
+  await Firebase.initializeApp();
+  // TODO: check if get data from Firestore
+  var weeklyDateObjRepository = WeeklyDateObjRepository();
+  await weeklyDateObjRepository.getWeeklyDateObjs();
+
   // portait-up only
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
@@ -31,9 +39,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    print("✅");
-    // print(dotenv.env['ANDROID_API_KEY']);
-    print(dotenv.get("WEB_APP_ID"));
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
