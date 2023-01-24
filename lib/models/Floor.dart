@@ -6,7 +6,9 @@ class Floor {
   int id;
   String floorName;
   String fullDate;
-  List<Seat>? seats; // TODO: after generated, remove optional
+  List<Seat> seats;
 
-  Floor(this.id, this.floorName, this.fullDate, [this.seats]);
+  Floor(this.id, this.floorName, this.fullDate, this.seats);
+
+  // Decode fetched data from Firebase
 }

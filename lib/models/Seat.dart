@@ -16,4 +16,12 @@ class Seat {
     this.side,
     this.occupied,
   );
+
+  // TODO: decode data from Firebase
+  // factory Seat.fromMap(Map<String, dynamic> data) {
+  //   return Seat(
+  //     deskNr: data['deskNr'],
+
+  //   );
+  // }
 }

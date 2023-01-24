@@ -45,8 +45,8 @@ List<WeeklyDateObj> generateWeeklyDateObjs(List<int> floorIDs) {
 
     // generate weekly-obj
     var weeklyDateObj = WeeklyDateObj(
-      fullDate,
-      dailyFloors,
+      fullDate: fullDate,
+      floors: dailyFloors,
     );
     weeklyDateObjs.add(weeklyDateObj);
   }

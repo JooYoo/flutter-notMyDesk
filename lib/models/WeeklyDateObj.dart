@@ -1,15 +1,19 @@
 // ignore_for_file: file_names
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_not_my_desk/models/Floor.dart';
 
 class WeeklyDateObj {
-  String fullDate;
-  List<Floor> floors;
+  final String fullDate;
+  final List<Floor> floors;
 
-  WeeklyDateObj(this.fullDate, this.floors);
+  WeeklyDateObj({required this.fullDate, required this.floors});
 
   // Decode fetched data from Firebase
-  // factory WeeklyDateObj.fromSnapshot(){
-  //   return WeeklyDateObj(fullDate, floors)
-  // }
+  factory WeeklyDateObj.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> document) {
+    final data = document.data()!;
+
+    return WeeklyDateObj(fullDate: data["fullDate"], floors: data["floors"]);
+  }
 }
