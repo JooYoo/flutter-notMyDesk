@@ -9,19 +9,21 @@ class Seat {
   String occupied;
 
   Seat(
-    this.deskNr,
-    this.floorId,
-    this.floorName,
-    this.fullDate,
-    this.side,
-    this.occupied,
-  );
+      {required this.deskNr,
+      required this.floorId,
+      required this.floorName,
+      required this.fullDate,
+      required this.side,
+      required this.occupied});
 
-  // TODO: decode data from Firebase
-  // factory Seat.fromMap(Map<String, dynamic> data) {
-  //   return Seat(
-  //     deskNr: data['deskNr'],
-
-  //   );
-  // }
+  // Decode data from Firebase
+  factory Seat.fromMap(Map<String, dynamic> data) {
+    return Seat(
+        deskNr: data['deskNr'],
+        floorId: data['floorId'],
+        floorName: data['floorName'],
+        fullDate: data['fullDate'],
+        side: data['side'],
+        occupied: data['occupied']);
+  }
 }

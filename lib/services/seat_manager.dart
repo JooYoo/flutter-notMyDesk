@@ -17,7 +17,14 @@ List<Seat> generateSeats(int floorId, String floorName, String fullDate) {
     int deskNr = i + 1;
     String side = calcSide(deskNr);
 
-    Seat newSeat = Seat(deskNr, floorId, floorName, fullDate, side, '');
+    Seat newSeat = Seat(
+        deskNr: deskNr,
+        floorId: floorId,
+        floorName: floorName,
+        fullDate: fullDate,
+        side: side,
+        occupied: '');
+
     seats.add(newSeat);
   }
   return seats;

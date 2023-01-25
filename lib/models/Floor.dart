@@ -3,12 +3,23 @@
 import 'package:flutter_not_my_desk/models/Seat.dart';
 
 class Floor {
-  int id;
-  String floorName;
-  String fullDate;
-  List<Seat> seats;
+  final int id;
+  final String floorName;
+  final String fullDate;
+  final List<Seat> seats;
 
-  Floor(this.id, this.floorName, this.fullDate, this.seats);
+  Floor(
+      {required this.id,
+      required this.floorName,
+      required this.fullDate,
+      required this.seats});
 
   // Decode fetched data from Firebase
+  factory Floor.fromMap(Map<String, dynamic> data) {
+    return Floor(
+        id: data['id'],
+        floorName: data['floorName'],
+        fullDate: data['fullDate'],
+        seats: data['seats']);
+  }
 }

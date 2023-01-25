@@ -39,7 +39,11 @@ List<WeeklyDateObj> generateWeeklyDateObjs(List<int> floorIDs) {
     for (var floorId in floorIDs) {
       var floorName = calcFloorNameEn(floorId);
       var oneFloorSeats = generateSeats(floorId, floorName, fullDate);
-      var oneFloor = Floor(floorId, floorName, fullDate, oneFloorSeats);
+      var oneFloor = Floor(
+          id: floorId,
+          floorName: floorName,
+          fullDate: fullDate,
+          seats: oneFloorSeats);
       dailyFloors.add(oneFloor);
     }
 
