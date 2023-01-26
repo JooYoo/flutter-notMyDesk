@@ -20,6 +20,6 @@ class Floor {
         id: data['id'],
         floorName: data['floorName'],
         fullDate: data['fullDate'],
-        seats: data['seats']);
+        seats: List<Seat>.from(data['seats'].map((x) => Seat.fromMap(x))));
   }
 }

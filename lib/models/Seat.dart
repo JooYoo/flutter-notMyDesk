@@ -24,6 +24,6 @@ class Seat {
         floorName: data['floorName'],
         fullDate: data['fullDate'],
         side: data['side'],
-        occupied: data['occupied']);
+        occupied: data['occupied'] ?? '');
   }
 }

@@ -14,6 +14,8 @@ class WeeklyDateObj {
       DocumentSnapshot<Map<String, dynamic>> document) {
     final data = document.data()!;
 
-    return WeeklyDateObj(fullDate: data["fullDate"], floors: data["floors"]);
+    return WeeklyDateObj(
+        fullDate: data["fullDate"],
+        floors: List<Floor>.from(data["floors"].map((x) => Floor.fromMap(x))));
   }
 }
