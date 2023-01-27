@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_not_my_desk/models/Floor.dart';
 import 'package:flutter_not_my_desk/models/Seat.dart';
 import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
+import 'package:flutter_not_my_desk/repository/weeklyDateObj_repository.dart';
 import 'package:flutter_not_my_desk/services/time_manager.dart';
 import 'package:flutter_not_my_desk/services/weekly_floor_manager.dart';
 
@@ -9,10 +10,13 @@ final List<WeeklyDateObj> defaultWeeklyDateObjs =
     generateWeeklyDateObjs([3, 4, 5]);
 final String defaultCurrentFullDate = getCurrentFullDate();
 
+// TODO: in view to set weeklyDates when it's a available
+var weeklyDateObjRepo = WeeklyDateObjRepository();
+
 class WeeklyDateObjProvider extends ChangeNotifier {
   // weekly-date-objs (x7) for the current week
   // defaul: local generated data (FIXME: add online storage)
-  final List<WeeklyDateObj> _weeklyDateObjs = generateWeeklyDateObjs([3, 4, 5]);
+  final List<WeeklyDateObj> _weeklyDateObjs = defaultWeeklyDateObjs;
   List<WeeklyDateObj> get weeklyDateObjs => _weeklyDateObjs;
 
   // selected-fullDate
