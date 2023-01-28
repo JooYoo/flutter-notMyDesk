@@ -16,8 +16,15 @@ var weeklyDateObjRepo = WeeklyDateObjRepository();
 class WeeklyDateObjProvider extends ChangeNotifier {
   // weekly-date-objs (x7) for the current week
   // defaul: local generated data (FIXME: add online storage)
-  final List<WeeklyDateObj> _weeklyDateObjs = defaultWeeklyDateObjs;
+  // When app start
+  // - fetch data from Firestore
+  // - set the fetched data to `_weeklyDateObjs`
+  List<WeeklyDateObj> _weeklyDateObjs = defaultWeeklyDateObjs;
   List<WeeklyDateObj> get weeklyDateObjs => _weeklyDateObjs;
+  set weeklyDateObjs(List<WeeklyDateObj> val) {
+    _weeklyDateObjs = val;
+    notifyListeners();
+  }
 
   // selected-fullDate
   // default: today
@@ -58,7 +65,7 @@ class WeeklyDateObjProvider extends ChangeNotifier {
   // set seat by: selected-floor, selected-seat, occupiedBy
   void setOccupyBy(Seat selectedSeat, String newOccupiedBy) {
     // find target seat from
-    var seat = _selectedFloor.seats!
+    var seat = _selectedFloor.seats
         .firstWhere((seat) => seat.deskNr == selectedSeat.deskNr);
     // set occupy
     seat.occupied = newOccupiedBy;

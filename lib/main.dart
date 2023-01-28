@@ -20,12 +20,12 @@ Future main() async {
   var weeklyDateObjRepository = WeeklyDateObjRepository();
   await weeklyDateObjRepository.getWeeklyDateObjs();
 
-  // portait-up only
+  // Portait-up only
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(
-      // provider: share state globally
+      // Provider: share state globally
       ChangeNotifierProvider<WeeklyDateObjProvider>(
         child: const MyApp(),
         create: (_) => WeeklyDateObjProvider(),
@@ -36,7 +36,7 @@ Future main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  // This widget is the root of your application.
+  // The root of the app
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
