@@ -16,10 +16,6 @@ Future main() async {
   await dotenv.load(fileName: "lib/.env");
   // init firebase
   await Firebase.initializeApp();
-  // TODO: check if get data from Firestore
-  var weeklyDateObjRepository = WeeklyDateObjRepository();
-  await weeklyDateObjRepository.getWeeklyDateObjs();
-
   // Portait-up only
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
@@ -44,7 +40,26 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const NavBar(),
+      home: FutureBuilder(
+        future: context.read<WeeklyDateObjProvider>().fetchDataSetStore(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasData) {
+              return const NavBar();
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text(snapshot.error.toString()),
+              );
+            } else {
+              return const Center(
+                child: Text("🙏🏼 Fetch data error"),
+              );
+            }
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
       debugShowCheckedModeBanner: false,
     );
   }

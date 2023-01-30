@@ -45,6 +45,22 @@ class WeeklyDateObjProvider extends ChangeNotifier {
   Floor get selectedFloor => _selectedFloor;
 
   /* --------------------------------- methods -------------------------------- */
+  // fetch data from Firebase set to store
+  fetchDataSetStore() async {
+    // fetch data
+    var weeklyDateObjRepository = WeeklyDateObjRepository();
+    var data = await weeklyDateObjRepository.getWeeklyDateObjs();
+
+    // set to store
+    _weeklyDateObjs = data;
+
+    // responsive
+    notifyListeners();
+
+    // return data for FutureBuilder in `main.dart`
+    return _weeklyDateObjs;
+  }
+
   // set current floor by selected-date, floor-id
   void setSelectedFloorBy(
     List<WeeklyDateObj> weeklyDateObjs,
