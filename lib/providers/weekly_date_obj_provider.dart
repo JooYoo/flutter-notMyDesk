@@ -10,9 +10,6 @@ final List<WeeklyDateObj> defaultWeeklyDateObjs =
     generateWeeklyDateObjs([3, 4, 5]);
 final String defaultCurrentFullDate = getCurrentFullDate();
 
-// TODO: in view to set weeklyDates when it's a available
-var weeklyDateObjRepo = WeeklyDateObjRepository();
-
 class WeeklyDateObjProvider extends ChangeNotifier {
   // weekly-date-objs (x7) for the current week
   // defaul: local generated data (FIXME: add online storage)

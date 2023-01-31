@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,6 +17,8 @@ Future main() async {
   await dotenv.load(fileName: "lib/.env");
   // init firebase
   await Firebase.initializeApp();
+  // clear cache when need
+  // FirebaseFirestore.instance.clearPersistence();
   // Portait-up only
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
