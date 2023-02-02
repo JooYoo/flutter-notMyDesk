@@ -9,6 +9,7 @@ import 'package:flutter_not_my_desk/services/weekly_floor_manager.dart';
 final List<WeeklyDateObj> defaultWeeklyDateObjs =
     generateWeeklyDateObjs([3, 4, 5]);
 final String defaultCurrentFullDate = getCurrentFullDate();
+var weeklyDateObjRepository = WeeklyDateObjRepository();
 
 class WeeklyDateObjProvider extends ChangeNotifier {
   // weekly-date-objs (x7) for the current week
@@ -45,7 +46,7 @@ class WeeklyDateObjProvider extends ChangeNotifier {
   // fetch data from Firebase set to store
   fetchDataSetStore() async {
     // fetch data
-    var weeklyDateObjRepository = WeeklyDateObjRepository();
+
     var data = await weeklyDateObjRepository.getWeeklyDateObjs();
 
     // set to store
@@ -82,6 +83,7 @@ class WeeklyDateObjProvider extends ChangeNotifier {
         .firstWhere((seat) => seat.deskNr == selectedSeat.deskNr);
     // set occupy
     seat.occupied = newOccupiedBy;
+    // TODO: update date to Firebase
 
     notifyListeners();
   }

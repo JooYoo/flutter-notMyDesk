@@ -14,6 +14,16 @@ class Floor {
       required this.fullDate,
       required this.seats});
 
+  // When write data to Firebase
+  toJson() {
+    return {
+      "id": id,
+      "floorName": floorName,
+      "fullDate": fullDate,
+      "seats": seats
+    };
+  }
+
   // Decode fetched data from Firebase
   factory Floor.fromMap(Map<String, dynamic> data) {
     return Floor(

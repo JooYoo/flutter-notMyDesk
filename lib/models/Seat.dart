@@ -16,6 +16,18 @@ class Seat {
       required this.side,
       required this.occupied});
 
+  // When write data to Firebase
+  toJson() {
+    return {
+      "deskNr": deskNr,
+      "floorId": floorId,
+      "floorName": floorName,
+      "fullDate": fullDate,
+      "side": side,
+      "occupiedBy": occupied
+    };
+  }
+
   // Decode data from Firebase
   factory Seat.fromMap(Map<String, dynamic> data) {
     return Seat(
@@ -24,6 +36,6 @@ class Seat {
         floorName: data['floorName'],
         fullDate: data['fullDate'],
         side: data['side'],
-        occupied: data['occupied'] ?? '');
+        occupied: data['occupiedBy'] ?? "");
   }
 }
