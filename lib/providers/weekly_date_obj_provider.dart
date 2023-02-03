@@ -46,7 +46,6 @@ class WeeklyDateObjProvider extends ChangeNotifier {
   // fetch data from Firebase set to store
   fetchDataSetStore() async {
     // fetch data
-
     var data = await weeklyDateObjRepository.getWeeklyDateObjs();
 
     // set to store
@@ -77,13 +76,14 @@ class WeeklyDateObjProvider extends ChangeNotifier {
   }
 
   // set seat by: selected-floor, selected-seat, occupiedBy
-  void setOccupyBy(Seat selectedSeat, String newOccupiedBy) {
+  Future<void> setOccupyBy(Seat selectedSeat, String newOccupiedBy) async {
     // find target seat from
     var seat = _selectedFloor.seats
         .firstWhere((seat) => seat.deskNr == selectedSeat.deskNr);
     // set occupy
     seat.occupied = newOccupiedBy;
-    // TODO: update date to Firebase
+    // update date to Firebase
+    await weeklyDateObjRepository.fbUpdateObj(_weeklyDateObjs, seat);
 
     notifyListeners();
   }
