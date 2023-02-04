@@ -24,8 +24,6 @@ class WeeklyDateObjRepository {
     // find selected-DateObj based on selected-seat-fullDate
     var localSelectedWeeklyDateObj = weeklyDateObjs.firstWhere(
         (weeklyDateObj) => weeklyDateObj.fullDate == selectedSeat.fullDate);
-    // // selected-weekly-dateObj floors
-    // var selectedObjFloors = selectedWeeklyDateObj.floors;
     // selected-weekly-dateObj id
     var selectedObjId = localSelectedWeeklyDateObj.id;
 
