@@ -13,10 +13,10 @@ var weeklyDateObjRepository = WeeklyDateObjRepository();
 
 class WeeklyDateObjProvider extends ChangeNotifier {
   // weekly-date-objs (x7) for the current week
-  // defaul: local generated data (FIXME: add online storage)
+  // defaul: local generated data
   // When app start
   // - fetch data from Firestore
-  // - set the fetched data to `_weeklyDateObjs`
+  // - set the fetched data to `_weeklyDateObjs` to replace the generated data
   List<WeeklyDateObj> _weeklyDateObjs = defaultWeeklyDateObjs;
   List<WeeklyDateObj> get weeklyDateObjs => _weeklyDateObjs;
   set weeklyDateObjs(List<WeeklyDateObj> val) {
@@ -54,6 +54,7 @@ class WeeklyDateObjProvider extends ChangeNotifier {
     // responsive
     notifyListeners();
 
+    // TODO: no need to return anything because data is already set to _weeklyDateObjs
     // return data for FutureBuilder in `main.dart`
     return _weeklyDateObjs;
   }

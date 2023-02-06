@@ -16,14 +16,23 @@ class WeeklyDateObjRepository {
         .map<WeeklyDateObj>((e) => WeeklyDateObj.fromSnapshot(e))
         .toList();
 
-    // TODO: put into a usecase
+    /// TODO: put into a usecase
     // if fb is empty then generate
     if (weeklyDateObjs.isEmpty) {
       weeklyDateObjs = generateWeeklyDateObjs([3, 4, 5]);
+      // save new generated objs into fb
+      fbSaveData(weeklyDateObjs);
     }
 
     // TODO: if fb-data is too old, generate new
     return weeklyDateObjs;
+  }
+
+  // FIXME:
+  fbSaveData(List<WeeklyDateObj> weeklyDateObjs) {
+    for (var obj in weeklyDateObjs) {
+      _db.collection("weeklyDateObjs").add(obj.toJson());
+    }
   }
 
   // firebase - update document in Firebase

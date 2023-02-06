@@ -11,7 +11,7 @@ class WeeklyDateObj {
   WeeklyDateObj({this.id, required this.fullDate, required this.floors});
 
   // When write data to Firebase
-  toJson() {
+  Map<String, dynamic> toJson() {
     return {"fullDate": fullDate, "floors": floors};
   }
 
