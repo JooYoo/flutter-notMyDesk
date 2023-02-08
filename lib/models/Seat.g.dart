@@ -12,7 +12,7 @@ Seat _$SeatFromJson(Map<String, dynamic> json) => Seat(
       floorName: json['floorName'] as String,
       fullDate: json['fullDate'] as String,
       side: json['side'] as String,
-      occupied: json['occupied'] as String,
+      occupied: json['occupiedBy'] as String,
     );
 
 Map<String, dynamic> _$SeatToJson(Seat instance) => <String, dynamic>{
