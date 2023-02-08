@@ -28,6 +28,7 @@ class WeeklyDateObjRepository {
     return weeklyDateObjs;
   }
 
+  // TODO: try to save objs to empty fb
   // FIXME:
   fbSaveData(List<WeeklyDateObj> weeklyDateObjs) {
     for (var obj in weeklyDateObjs) {
@@ -44,7 +45,7 @@ class WeeklyDateObjRepository {
     // selected-weekly-dateObj id
     var selectedObjId = localSelectedWeeklyDateObj.id;
 
-    // FIXME: works, refactoring needed
+    // FIXME: works, should refactor, too dirty
     // fetch data from Firebase
     final value =
         await _db.collection("weeklyDateObjs").doc(selectedObjId).get();

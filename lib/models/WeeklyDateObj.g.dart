@@ -6,9 +6,11 @@ part of 'WeeklyDateObj.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-WeeklyDateObj _$WeeklyDateObjFromJson(Map<String, dynamic> json) =>
+WeeklyDateObj _$WeeklyDateObjFromJson(
+        DocumentSnapshot<Map<String, dynamic>> document,
+        Map<String, dynamic> json) =>
     WeeklyDateObj(
-      id: json['id'] as String?,
+      id: document.id,
       fullDate: json['fullDate'] as String,
       floors: (json['floors'] as List<dynamic>)
           .map((e) => Floor.fromJson(e as Map<String, dynamic>))

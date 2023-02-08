@@ -16,7 +16,7 @@ class WeeklyDateObj {
 
   factory WeeklyDateObj.fromSnapshot(
           DocumentSnapshot<Map<String, dynamic>> document) =>
-      _$WeeklyDateObjFromJson(document.data()!);
+      _$WeeklyDateObjFromJson(document, document.data()!);
 
   Map<String, dynamic> toJson() => _$WeeklyDateObjToJson(this);
 
