@@ -51,6 +51,10 @@ class WeeklyDateObjProvider extends ChangeNotifier {
     // set to store
     _weeklyDateObjs = data;
 
+    // set selectedFloor when init
+    _selectedFloor =
+        getSelectedDateFloors(_weeklyDateObjs, defaultCurrentFullDate).last;
+
     // responsive
     notifyListeners();
 
