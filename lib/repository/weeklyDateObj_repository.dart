@@ -16,7 +16,7 @@ class WeeklyDateObjRepository {
         .map<WeeklyDateObj>((e) => WeeklyDateObj.fromSnapshot(e))
         .toList();
 
-    /// TODO: put into a usecase
+    /// FIXME: put into a usecase
     // if fb is empty then generate
     if (weeklyDateObjs.isEmpty) {
       weeklyDateObjs = generateWeeklyDateObjs([3, 4, 5]);
@@ -28,8 +28,7 @@ class WeeklyDateObjRepository {
     return weeklyDateObjs;
   }
 
-  // TODO: try to save objs to empty fb
-  // FIXME:
+  // Save objs to empty fb
   fbSaveData(List<WeeklyDateObj> weeklyDateObjs) {
     for (var obj in weeklyDateObjs) {
       _db.collection("weeklyDateObjs").add(obj.toJson());

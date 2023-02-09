@@ -21,5 +21,5 @@ Map<String, dynamic> _$SeatToJson(Seat instance) => <String, dynamic>{
       'floorName': instance.floorName,
       'fullDate': instance.fullDate,
       'side': instance.side,
-      'occupied': instance.occupied,
+      'occupiedBy': instance.occupied,
     };
