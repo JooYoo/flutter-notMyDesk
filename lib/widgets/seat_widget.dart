@@ -31,7 +31,7 @@ class _SeatWidgetState extends State<SeatWidget> {
       width: 100,
       child: OutlinedButton(
         child: Text(
-          '${widget.seat.deskNr.toString()}. ${widget.seat.occupied}',
+          '${widget.seat.deskNr.toString()}. ${widget.seat.occupiedBy}',
           style: const TextStyle(color: Colors.black),
         ),
         onPressed: () {
@@ -59,9 +59,9 @@ class _SeatWidgetState extends State<SeatWidget> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                widget.seat.occupied == ''
+                                widget.seat.occupiedBy == ''
                                     ? "Empty"
-                                    : widget.seat.occupied,
+                                    : widget.seat.occupiedBy,
                                 style: const TextStyle(
                                   fontSize: 32,
                                 ),

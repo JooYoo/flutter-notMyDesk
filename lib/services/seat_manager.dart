@@ -23,7 +23,7 @@ List<Seat> generateSeats(int floorId, String floorName, String fullDate) {
         floorName: floorName,
         fullDate: fullDate,
         side: side,
-        occupied: '');
+        occupiedBy: '');
 
     seats.add(newSeat);
   }

@@ -58,7 +58,7 @@ class WeeklyDateObjRepository {
         fbFloors.firstWhere((item) => item['id'] == selectedSeat.floorId);
     var fbSeat = fbFloor['seats']
         .firstWhere((item) => item['deskNr'] == selectedSeat.deskNr);
-    fbSeat['occupiedBy'] = selectedSeat.occupied;
+    fbSeat['occupiedBy'] = selectedSeat.occupiedBy;
 
     // update doc based on ID in Firestore
     _db.collection("weeklyDateObjs").doc(selectedObjId).update(readyUpdateObj);

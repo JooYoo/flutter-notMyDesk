@@ -11,7 +11,7 @@ class Seat {
   String floorName;
   String fullDate;
   String side;
-  String occupied;
+  String occupiedBy;
 
   Seat(
       {required this.deskNr,
@@ -19,7 +19,7 @@ class Seat {
       required this.floorName,
       required this.fullDate,
       required this.side,
-      required this.occupied});
+      required this.occupiedBy});
 
   factory Seat.fromJson(Map<String, dynamic> json) => _$SeatFromJson(json);
 

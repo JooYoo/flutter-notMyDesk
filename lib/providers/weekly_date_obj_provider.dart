@@ -44,14 +44,15 @@ class WeeklyDateObjProvider extends ChangeNotifier {
 
   /* --------------------------------- methods -------------------------------- */
   // fetch data from Firebase set to store
+  /// Be used in `main`
   fetchDataSetStore() async {
-    // fetch data
+    // fetch data from Firebase
     var data = await weeklyDateObjRepository.getWeeklyDateObjs();
 
-    // set to store
+    // set feched data into center-store
     _weeklyDateObjs = data;
 
-    // set selectedFloor when init
+    // set selectedFloor based on fetched data when init
     _selectedFloor =
         getSelectedDateFloors(_weeklyDateObjs, defaultCurrentFullDate).last;
 
@@ -86,7 +87,7 @@ class WeeklyDateObjProvider extends ChangeNotifier {
     var seat = _selectedFloor.seats
         .firstWhere((seat) => seat.deskNr == selectedSeat.deskNr);
     // set occupy
-    seat.occupied = newOccupiedBy;
+    seat.occupiedBy = newOccupiedBy;
     // update date to Firebase
     await weeklyDateObjRepository.fbUpdateObj(_weeklyDateObjs, seat);
 
