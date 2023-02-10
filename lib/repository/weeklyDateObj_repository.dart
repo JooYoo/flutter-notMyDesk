@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_not_my_desk/models/Seat.dart';
 import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
+import 'package:flutter_not_my_desk/services/time_manager.dart';
 import 'package:flutter_not_my_desk/services/weekly_floor_manager.dart';
 
 class WeeklyDateObjRepository {
@@ -16,7 +17,6 @@ class WeeklyDateObjRepository {
         .map<WeeklyDateObj>((e) => WeeklyDateObj.fromSnapshot(e))
         .toList();
 
-    /// FIXME: put into a usecase
     // if fb is empty then generate
     if (weeklyDateObjs.isEmpty) {
       weeklyDateObjs = generateWeeklyDateObjs([3, 4, 5]);
@@ -24,7 +24,13 @@ class WeeklyDateObjRepository {
       fbSaveData(weeklyDateObjs);
     }
 
-    // TODO: if fb-data is too old, generate new
+    // if fb-data is too old, generate new
+    if (isWeeklyDateObjsOutOfDate(weeklyDateObjs)) {
+      weeklyDateObjs = generateWeeklyDateObjs([3, 4, 5]);
+      // save new generated objs into fb
+      fbSaveData(weeklyDateObjs);
+    }
+
     return weeklyDateObjs;
   }
 
@@ -44,7 +50,6 @@ class WeeklyDateObjRepository {
     // selected-weekly-dateObj id
     var selectedObjId = localSelectedWeeklyDateObj.id;
 
-    // FIXME: works, should refactor, too dirty
     // fetch data from Firebase
     final value =
         await _db.collection("weeklyDateObjs").doc(selectedObjId).get();

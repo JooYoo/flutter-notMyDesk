@@ -1,5 +1,11 @@
+// ignore_for_file: depend_on_referenced_packages
+
 // calc: DateTime -> String
 // e.g. 2022-12-13-00:00 -> '2022-12-13'
+import 'dart:ffi';
+import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
+import 'package:collection/collection.dart';
+
 String calcFullDate(DateTime dateTime) {
   return dateTime.toString().substring(0, 10);
 }
@@ -38,4 +44,14 @@ List<DateTime> getWeeklyDates() {
   }
 
   return weekDates;
+}
+
+// Compare current-date with fullDates of WeeklyDateObjs
+/// Check if weeklyDateObjs is out of date
+bool isWeeklyDateObjsOutOfDate(List<WeeklyDateObj> weeklyDateObjs) {
+  var currFullDate = getCurrentFullDate();
+  var existObj =
+      weeklyDateObjs.firstWhereOrNull((obj) => obj.fullDate == currFullDate);
+
+  return existObj != null ? false : true;
 }
