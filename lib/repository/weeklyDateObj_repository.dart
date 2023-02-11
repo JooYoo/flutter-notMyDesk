@@ -24,14 +24,27 @@ class WeeklyDateObjRepository {
       fbSaveData(weeklyDateObjs);
     }
 
-    // if fb-data is too old, generate new
+    // if fb-data is out of date, generate new
     if (isWeeklyDateObjsOutOfDate(weeklyDateObjs)) {
+      // TODO: clean up fb
+
+      // generate new objs
       weeklyDateObjs = generateWeeklyDateObjs([3, 4, 5]);
       // save new generated objs into fb
       fbSaveData(weeklyDateObjs);
     }
 
     return weeklyDateObjs;
+  }
+
+  // Delete objes from fb
+  fbDeleteData() async {
+    // var collection = FirebaseFirestore.instance.collection('weeklyDateObjs');
+    // var snapshots = await collection.get();
+    final snapshots = await _db.collection("weeklyDateObjs").get();
+    for (var doc in snapshots.docs) {
+      await doc.reference.delete();
+    }
   }
 
   // Save objs to empty fb
