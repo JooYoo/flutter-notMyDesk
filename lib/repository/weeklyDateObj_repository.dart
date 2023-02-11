@@ -12,22 +12,25 @@ class WeeklyDateObjRepository {
 
   // firebase - fetch document from Firebase
   Future<List<WeeklyDateObj>> getWeeklyDateObjs() async {
+    // REFACTOR: fbLoadData()
     final snapshot = await _db.collection("weeklyDateObjs").get();
     var weeklyDateObjs = snapshot.docs
         .map<WeeklyDateObj>((e) => WeeklyDateObj.fromSnapshot(e))
         .toList();
 
+    // REFACTOR: createAndUploadWeeklyDateObjs()
     // if fb is empty then generate
     if (weeklyDateObjs.isEmpty) {
       weeklyDateObjs = generateWeeklyDateObjs([3, 4, 5]);
-      // save new generated objs into fb
+      // save new generated objs into fb // REFACTOR: uploadData()
       fbSaveData(weeklyDateObjs);
     }
 
+    // REFACTOR: deleteRemoteOldData()
     // if fb-data is out of date, generate new
     if (isWeeklyDateObjsOutOfDate(weeklyDateObjs)) {
-      // TODO: clean up fb
-
+      // clean up fb
+      await fbDeleteData();
       // generate new objs
       weeklyDateObjs = generateWeeklyDateObjs([3, 4, 5]);
       // save new generated objs into fb
@@ -39,8 +42,6 @@ class WeeklyDateObjRepository {
 
   // Delete objes from fb
   fbDeleteData() async {
-    // var collection = FirebaseFirestore.instance.collection('weeklyDateObjs');
-    // var snapshots = await collection.get();
     final snapshots = await _db.collection("weeklyDateObjs").get();
     for (var doc in snapshots.docs) {
       await doc.reference.delete();
