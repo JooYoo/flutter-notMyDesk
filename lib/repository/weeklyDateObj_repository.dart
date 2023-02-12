@@ -12,6 +12,8 @@ class WeeklyDateObjRepository {
 
   // firebase - fetch document from Firebase
   Future<List<WeeklyDateObj>> getWeeklyDateObjs() async {
+    // TODO: clean up class WeeklyDateObjs data
+
     // REFACTOR: fbLoadData()
     final snapshot = await _db.collection("weeklyDateObjs").get();
     var weeklyDateObjs = snapshot.docs

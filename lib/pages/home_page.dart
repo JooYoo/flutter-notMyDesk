@@ -14,56 +14,67 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Column(
-        children: [
-          Flexible(
-            flex: 5,
-            child: Container(
-              color: Colors.white,
-              child: const DatePickerWeekly(),
-            ),
-          ),
-          Flexible(
-            flex: 2,
-            child: TabBar(
-              labelColor: Colors.black,
-              indicator: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    width: 1.5,
-                    color: Colors.black,
+    return RefreshIndicator(
+      onRefresh: () async {
+        // TODO: fetch new data
+        print("refresh!!");
+      },
+      child: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          child: DefaultTabController(
+            length: 2,
+            child: Column(
+              children: [
+                Flexible(
+                  flex: 5,
+                  child: Container(
+                    color: Colors.white,
+                    child: const DatePickerWeekly(),
                   ),
                 ),
-              ),
-              tabs: const [
-                Tab(text: 'L E F T'),
-                Tab(text: 'R I G H T'),
+                Flexible(
+                  flex: 2,
+                  child: TabBar(
+                    labelColor: Colors.black,
+                    indicator: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          width: 1.5,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    tabs: const [
+                      Tab(text: 'L E F T'),
+                      Tab(text: 'R I G H T'),
+                    ],
+                    onTap: (index) {
+                      // TODO: if need
+                      // index 0: RoomSide.left
+                      // index 1: RoomSide.right
+                    },
+                  ),
+                ),
+                const Flexible(
+                  flex: 10,
+                  child: TabBarView(
+                    children: [
+                      // left-room
+                      RoomWidget(
+                        RoomSide.left,
+                      ),
+                      // right-room
+                      RoomWidget(
+                        RoomSide.right,
+                      ),
+                    ],
+                  ),
+                ),
               ],
-              onTap: (index) {
-                // TODO: if need
-                // index 0: RoomSide.left
-                // index 1: RoomSide.right
-              },
             ),
           ),
-          const Flexible(
-            flex: 15,
-            child: TabBarView(
-              children: [
-                // left-room
-                RoomWidget(
-                  RoomSide.left,
-                ),
-                // right-room
-                RoomWidget(
-                  RoomSide.right,
-                ),
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
