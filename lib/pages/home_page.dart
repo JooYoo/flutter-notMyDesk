@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_not_my_desk/providers/weekly_date_obj_provider.dart';
 import 'package:flutter_not_my_desk/services/seat_manager.dart';
 import 'package:flutter_not_my_desk/widgets/datepicker_weekly.dart';
 import 'package:flutter_not_my_desk/widgets/room_widget.dart';
+import 'package:provider/provider.dart';
 import 'dart:developer';
 
 class HomePage extends StatefulWidget {
@@ -16,8 +18,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async {
-        // TODO: fetch new data
-        print("refresh!!");
+        // fetch updated data
+        context.read<WeeklyDateObjProvider>().fetchDataSetStore();
       },
       child: SingleChildScrollView(
         child: Container(
