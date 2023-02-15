@@ -28,18 +28,26 @@ class WeeklyDateObjRepository {
       fbSaveData(weeklyDateObjs);
     }
 
-    // REFACTOR: deleteRemoteOldData()
     // if fb-data is out of date, generate new
+    weeklyDateObjs = await cleanRemoteData(weeklyDateObjs);
+
+    return weeklyDateObjs;
+  }
+
+  // Delete remote data and generate new
+  cleanRemoteData(List<WeeklyDateObj> weeklyDateObjs) async {
+    var data = weeklyDateObjs;
+
     if (isWeeklyDateObjsOutOfDate(weeklyDateObjs)) {
       // clean up fb
       await fbDeleteData();
       // generate new objs
-      weeklyDateObjs = generateWeeklyDateObjs([3, 4, 5]);
+      data = generateWeeklyDateObjs([3, 4, 5]);
       // save new generated objs into fb
       fbSaveData(weeklyDateObjs);
     }
 
-    return weeklyDateObjs;
+    return data;
   }
 
   // Delete objes from fb
