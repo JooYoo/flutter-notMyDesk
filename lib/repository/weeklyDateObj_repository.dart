@@ -50,7 +50,7 @@ class WeeklyDateObjRepository {
     return data;
   }
 
-  // Delete objes from fb
+  // Delete objs from fb
   fbDeleteData() async {
     final snapshots = await _db.collection("weeklyDateObjs").get();
     for (var doc in snapshots.docs) {
