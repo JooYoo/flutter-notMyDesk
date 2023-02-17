@@ -1,11 +1,11 @@
 import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
 
-abstract class WeeklyDateObjRepo {
+abstract class WeeklyDateObjRepoProtocol {
   List<WeeklyDateObj> fetchWeeklyDateObjs();
   void deleteWeeklyDateObjs();
 }
 
-class WeeklyDateObjRepoImpl implements WeeklyDateObjRepo {
+class WeeklyDateObjRepo implements WeeklyDateObjRepoProtocol {
   @override
   void deleteWeeklyDateObjs() {
     // TODO: implement deleteWeeklyDateObjs
