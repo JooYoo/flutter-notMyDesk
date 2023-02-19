@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
 
 abstract class WeeklyDateObjRemoteDataSourceProtocol {
-  void createObjs(List<WeeklyDateObj> weeklyDateObjs);
-  List<WeeklyDateObj> retrieveObjs();
+  void uploadObjs(List<WeeklyDateObj> weeklyDateObjs);
+  Future<List<WeeklyDateObj>> downloadObjs();
   void deleteObjs();
   void updateObjBy(String id);
 }
@@ -15,16 +15,19 @@ class WeeklyDateObjRemoteDataSource
 
   // Create weeklyDateObjs into Firestore
   @override
-  void createObjs(List<WeeklyDateObj> weeklyDateObjs) {
+  void uploadObjs(List<WeeklyDateObj> weeklyDateObjs) {
     for (var obj in weeklyDateObjs) {
       _db.collection("weeklyDateObjs").add(obj.toJson());
     }
   }
 
   @override
-  List<WeeklyDateObj> retrieveObjs() {
-    // TODO: implement retrieveObjs
-    throw UnimplementedError();
+  Future<List<WeeklyDateObj>> downloadObjs() async {
+    final snapshot = await _db.collection("weeklyDateObjs").get();
+    var weeklyDateObjs = snapshot.docs
+        .map<WeeklyDateObj>((e) => WeeklyDateObj.fromSnapshot(e))
+        .toList();
+    return weeklyDateObjs;
   }
 
   @override

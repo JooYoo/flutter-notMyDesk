@@ -3,29 +3,24 @@ import 'package:flutter_not_my_desk/features/weekly_date_objs/data/datasources/w
 import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
 
 abstract class WeeklyDateObjRepoProtocol {
-  void createObjs(List<WeeklyDateObj> weeklyDateObjs);
-  List<WeeklyDateObj> fetchWeeklyDateObjs();
-  void deleteWeeklyDateObjs();
+  void uploadObjs(List<WeeklyDateObj> weeklyDateObjs);
+  Future<List<WeeklyDateObj>> downloadObjs();
 }
 
 class WeeklyDateObjRepo implements WeeklyDateObjRepoProtocol {
+  // Dependency Injection from RemoteDataSource
   final WeeklyDateObjRemoteDataSourceProtocol remoteDS;
-
   WeeklyDateObjRepo({required this.remoteDS});
 
+  // Upload WeeklyDateObjs into FireStore based on collection name
   @override
-  void createObjs(List<WeeklyDateObj> weeklyDateObjs) {
-    remoteDS.createObjs(weeklyDateObjs);
+  void uploadObjs(List<WeeklyDateObj> weeklyDateObjs) {
+    remoteDS.uploadObjs(weeklyDateObjs);
   }
 
+  // Download WeeklyDateObjs into FireStore based on collection name
   @override
-  void deleteWeeklyDateObjs() {
-    // TODO: implement deleteWeeklyDateObjs
-  }
-
-  @override
-  List<WeeklyDateObj> fetchWeeklyDateObjs() {
-    // TODO: implement fetchWeeklyDateObjs
-    throw UnimplementedError();
+  Future<List<WeeklyDateObj>> downloadObjs() {
+    return remoteDS.downloadObjs();
   }
 }
