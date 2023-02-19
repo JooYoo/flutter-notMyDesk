@@ -19,7 +19,7 @@ void main() {
     sut = WeeklyDateObjRepo(remoteDS: mockRemoteDataSource);
   });
 
-  test('downloadWeeklyDateObjs_whenFunctionIsCalled_thenShouldReturnMockedObjs',
+  test('downloadObjs_whenFunctionIsCalled_thenShouldReturnMockedObjs',
       () async {
     // Given
     List<WeeklyDateObj> weeklyDateObjs = [
