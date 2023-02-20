@@ -31,6 +31,7 @@ void main() {
         .thenAnswer((_) => Future(() => weeklyDateObjs));
     var res = await sut.downloadObjs();
     // Then
+    verify(mockRemoteDataSource.downloadObjs()).called(1);
     expect(res.length, 2);
   });
 }
