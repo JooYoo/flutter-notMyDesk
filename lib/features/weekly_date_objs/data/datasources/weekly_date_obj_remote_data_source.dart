@@ -4,7 +4,7 @@ import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
 abstract class WeeklyDateObjRemoteDataSourceProtocol {
   void uploadObjs(List<WeeklyDateObj> weeklyDateObjs);
   Future<List<WeeklyDateObj>> downloadObjs();
-  void deleteObjs();
+  Future<void> deleteObjs();
   void updateObjBy(String id);
 }
 
@@ -21,6 +21,7 @@ class WeeklyDateObjRemoteDataSource
     }
   }
 
+  // Fetch weeklyDateObjs from Firebase
   @override
   Future<List<WeeklyDateObj>> downloadObjs() async {
     final snapshot = await _db.collection("weeklyDateObjs").get();
@@ -30,10 +31,15 @@ class WeeklyDateObjRemoteDataSource
     return weeklyDateObjs;
   }
 
+  // Delete all weeklyDateObjs from Firebase
   @override
-  void deleteObjs() {
-    // TODO: implement deleteObjs
-    throw UnimplementedError();
+  Future<void> deleteObjs() async {
+    // Get collection (a list of docs)
+    final snapshots = await _db.collection("weeklyDateObjs").get();
+    // Delete the docs one by one
+    for (var doc in snapshots.docs) {
+      await doc.reference.delete();
+    }
   }
 
   @override

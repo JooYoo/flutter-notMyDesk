@@ -49,13 +49,14 @@ class MockWeeklyDateObjRemoteDataSourceProtocol extends _i1.Mock
             _i4.Future<List<_i3.WeeklyDateObj>>.value(<_i3.WeeklyDateObj>[]),
       ) as _i4.Future<List<_i3.WeeklyDateObj>>);
   @override
-  void deleteObjs() => super.noSuchMethod(
+  _i4.Future<void> deleteObjs() => (super.noSuchMethod(
         Invocation.method(
           #deleteObjs,
           [],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
   @override
   void updateObjBy(String? id) => super.noSuchMethod(
         Invocation.method(

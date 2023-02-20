@@ -5,6 +5,7 @@ import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
 abstract class WeeklyDateObjRepoProtocol {
   void uploadObjs(List<WeeklyDateObj> weeklyDateObjs);
   Future<List<WeeklyDateObj>> downloadObjs();
+  Future<void> deleteObjs();
 }
 
 class WeeklyDateObjRepo implements WeeklyDateObjRepoProtocol {
@@ -22,5 +23,11 @@ class WeeklyDateObjRepo implements WeeklyDateObjRepoProtocol {
   @override
   Future<List<WeeklyDateObj>> downloadObjs() {
     return remoteDS.downloadObjs();
+  }
+
+  // Delete all weeklyDateObjs from Firebase
+  @override
+  Future<void> deleteObjs() async {
+    await remoteDS.deleteObjs();
   }
 }

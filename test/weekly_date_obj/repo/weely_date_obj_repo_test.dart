@@ -34,4 +34,13 @@ void main() {
     verify(mockRemoteDataSource.downloadObjs()).called(1);
     expect(res.length, 2);
   });
+
+  test('deleteObjs_whenFunctionIsCalled_thenCalledOnce', () {
+    // When
+    when(mockRemoteDataSource.deleteObjs())
+        .thenAnswer((_) => Future(() => null));
+    sut.deleteObjs();
+    // Then
+    verify(mockRemoteDataSource.deleteObjs()).called(1);
+  });
 }

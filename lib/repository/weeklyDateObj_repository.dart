@@ -14,7 +14,7 @@ class WeeklyDateObjRepository {
   Future<List<WeeklyDateObj>> getWeeklyDateObjs() async {
     // TODO: clean up class WeeklyDateObjs data
 
-    // REFACTOR: fbLoadData()
+    // ✅ REFACTOR: downloadObjs()
     final snapshot = await _db.collection("weeklyDateObjs").get();
     var weeklyDateObjs = snapshot.docs
         .map<WeeklyDateObj>((e) => WeeklyDateObj.fromSnapshot(e))
@@ -24,7 +24,7 @@ class WeeklyDateObjRepository {
     // if fb is empty then generate
     if (weeklyDateObjs.isEmpty) {
       weeklyDateObjs = generateWeeklyDateObjs([3, 4, 5]);
-      // save new generated objs into fb // REFACTOR: uploadData()
+      // save new generated objs into fb // ✅ REFACTOR: uploadObjs()
       fbSaveData(weeklyDateObjs);
     }
 
@@ -50,7 +50,7 @@ class WeeklyDateObjRepository {
     return data;
   }
 
-  // Delete objs from fb
+  //✅ Delete objs from fb
   fbDeleteData() async {
     final snapshots = await _db.collection("weeklyDateObjs").get();
     for (var doc in snapshots.docs) {
@@ -58,7 +58,7 @@ class WeeklyDateObjRepository {
     }
   }
 
-  // Save objs to empty fb
+  //✅ Save objs to empty fb
   fbSaveData(List<WeeklyDateObj> weeklyDateObjs) {
     for (var obj in weeklyDateObjs) {
       _db.collection("weeklyDateObjs").add(obj.toJson());
