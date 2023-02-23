@@ -1,3 +1,4 @@
+import 'package:flutter_not_my_desk/core/locator/locator.dart';
 import 'package:flutter_not_my_desk/features/weekly_date_objs/domain/repositories/weekly_date_obj_repo.dart';
 import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
 import 'package:flutter_not_my_desk/services/time_manager.dart';
@@ -8,10 +9,8 @@ abstract class GetWeeklyDateObjsUcProtocol {
 }
 
 class GetWeeklyDateObjsUC implements GetWeeklyDateObjsUcProtocol {
-  // FIXME: try to use get_it
   // Dependency Injection
-  final WeeklyDateObjRepoProtocol weeklyDateObjRepo;
-  GetWeeklyDateObjsUC(this.weeklyDateObjRepo);
+  final weeklyDateObjRepo = locator.get<WeeklyDateObjRepoProtocol>();
 
   @override
   Future<List<WeeklyDateObj>> call() async {

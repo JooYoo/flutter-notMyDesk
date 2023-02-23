@@ -1,8 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_not_my_desk/core/locator/locator.dart';
 import 'package:flutter_not_my_desk/firebase_options.dart';
 import 'package:flutter_not_my_desk/pages/about_page.dart';
 import 'package:flutter_not_my_desk/pages/home_page.dart';
@@ -14,6 +14,8 @@ import 'package:provider/provider.dart';
 import 'dart:developer';
 
 Future main() async {
+  // setup locator for Dependency Injection globally
+  setup();
   // load .env
   await dotenv.load(fileName: "lib/.env");
   // init firebase

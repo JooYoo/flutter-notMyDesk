@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_not_my_desk/core/locator/locator.dart';
 import 'package:flutter_not_my_desk/features/weekly_date_objs/domain/usecases/get_weekly_date_objs_uc.dart';
 import 'package:flutter_not_my_desk/models/Floor.dart';
 import 'package:flutter_not_my_desk/models/Seat.dart';
@@ -14,10 +15,7 @@ var weeklyDateObjRepository = WeeklyDateObjRepository();
 
 class WeeklyDateObjProvider extends ChangeNotifier {
   // Dependency Injection
-  // FIXME: It causes the instance of Provider has a parameter:
-  // TODO: Try to use get_it to do Dependecy Injection
-  // final GetWeeklyDateObjsUcProtocol getWeeklyDateObjsUC;
-  // WeeklyDateObjProvider(this.getWeeklyDateObjsUC);
+  final getWeeklyDateObjsUC = locator.get<GetWeeklyDateObjsUcProtocol>();
 
   // weekly-date-objs (x7) for the current week
   // defaul: local generated data
@@ -53,9 +51,8 @@ class WeeklyDateObjProvider extends ChangeNotifier {
   // fetch data from Firebase set to store
   /// Be used in `main`
   fetchDataSetStore() async {
-    // var test = await getWeeklyDateObjsUC();
     // fetch data from Firebase
-    var data = await weeklyDateObjRepository.getWeeklyDateObjs();
+    var data = await getWeeklyDateObjsUC();
 
     // set feched data into center-store
     _weeklyDateObjs = data;
