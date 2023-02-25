@@ -10,30 +10,6 @@ import 'package:flutter_not_my_desk/services/weekly_floor_manager.dart';
 class WeeklyDateObjRepository {
   final _db = FirebaseFirestore.instance;
 
-  // firebase - fetch document from Firebase
-  Future<List<WeeklyDateObj>> getWeeklyDateObjs() async {
-    // TODO: clean up class WeeklyDateObjs data
-
-    // ✅ REFACTOR: downloadObjs()
-    final snapshot = await _db.collection("weeklyDateObjs").get();
-    var weeklyDateObjs = snapshot.docs
-        .map<WeeklyDateObj>((e) => WeeklyDateObj.fromSnapshot(e))
-        .toList();
-
-    // REFACTOR: createAndUploadWeeklyDateObjs()
-    // if fb is empty then generate
-    if (weeklyDateObjs.isEmpty) {
-      weeklyDateObjs = generateWeeklyDateObjs([3, 4, 5]);
-      // save new generated objs into fb // ✅ REFACTOR: uploadObjs()
-      fbSaveData(weeklyDateObjs);
-    }
-
-    // if fb-data is out of date, generate new
-    weeklyDateObjs = await cleanRemoteData(weeklyDateObjs);
-
-    return weeklyDateObjs;
-  }
-
   // Delete remote data and generate new
   cleanRemoteData(List<WeeklyDateObj> weeklyDateObjs) async {
     var data = weeklyDateObjs;
