@@ -10,22 +10,6 @@ import 'package:flutter_not_my_desk/services/weekly_floor_manager.dart';
 class WeeklyDateObjRepository {
   final _db = FirebaseFirestore.instance;
 
-  // Delete remote data and generate new
-  cleanRemoteData(List<WeeklyDateObj> weeklyDateObjs) async {
-    var data = weeklyDateObjs;
-
-    if (isWeeklyDateObjsOutOfDate(weeklyDateObjs)) {
-      // clean up fb
-      await fbDeleteData();
-      // generate new objs
-      data = generateWeeklyDateObjs([3, 4, 5]);
-      // save new generated objs into fb
-      fbSaveData(weeklyDateObjs);
-    }
-
-    return data;
-  }
-
   //✅ Delete objs from fb
   fbDeleteData() async {
     final snapshots = await _db.collection("weeklyDateObjs").get();
