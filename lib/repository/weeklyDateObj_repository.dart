@@ -1,21 +1,10 @@
 // ignore_for_file: file_names
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_not_my_desk/models/Seat.dart';
 import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
-import 'package:flutter_not_my_desk/services/time_manager.dart';
-import 'package:flutter_not_my_desk/services/weekly_floor_manager.dart';
 
 class WeeklyDateObjRepository {
   final _db = FirebaseFirestore.instance;
-
-  //✅ Save objs to empty fb
-  fbSaveData(List<WeeklyDateObj> weeklyDateObjs) {
-    for (var obj in weeklyDateObjs) {
-      _db.collection("weeklyDateObjs").add(obj.toJson());
-    }
-  }
 
   // firebase - update document in Firebase
   Future<void> fbUpdateObj(
@@ -26,7 +15,7 @@ class WeeklyDateObjRepository {
     // selected-weekly-dateObj id
     var selectedObjId = localSelectedWeeklyDateObj.id;
 
-    // fetch data from Firebase
+    // fetch data from Firebase // TODO: move to remoteDS
     final value =
         await _db.collection("weeklyDateObjs").doc(selectedObjId).get();
     final readyUpdateObj = value.data();
@@ -41,7 +30,7 @@ class WeeklyDateObjRepository {
         .firstWhere((item) => item['deskNr'] == selectedSeat.deskNr);
     fbSeat['occupiedBy'] = selectedSeat.occupiedBy;
 
-    // update doc based on ID in Firestore
+    //✅ update doc based on ID in Firestore
     _db.collection("weeklyDateObjs").doc(selectedObjId).update(readyUpdateObj);
   }
 }

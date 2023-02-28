@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_not_my_desk/models/Seat.dart';
 import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
 
 abstract class WeeklyDateObjRemoteDataSourceProtocol {
   void uploadObjs(List<WeeklyDateObj> weeklyDateObjs);
   Future<List<WeeklyDateObj>> downloadObjs();
   Future<void> deleteObjs();
-  void updateObjBy(String id);
+  void updateObjBy(String objId, Map<String, dynamic> updatedObj);
 }
 
 class WeeklyDateObjRemoteDataSource
@@ -43,8 +44,7 @@ class WeeklyDateObjRemoteDataSource
   }
 
   @override
-  void updateObjBy(String id) {
-    // TODO: implement updateObjBy
-    throw UnimplementedError();
+  void updateObjBy(String id, Map<String, dynamic> updatedObj) {
+    _db.collection("weeklyDateObjs").doc(id).update(updatedObj);
   }
 }

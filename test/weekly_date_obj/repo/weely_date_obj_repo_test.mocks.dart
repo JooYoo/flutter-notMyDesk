@@ -58,10 +58,17 @@ class MockWeeklyDateObjRemoteDataSourceProtocol extends _i1.Mock
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  void updateObjBy(String? id) => super.noSuchMethod(
+  void updateObjBy(
+    String? objId,
+    Map<String, dynamic>? updatedObj,
+  ) =>
+      super.noSuchMethod(
         Invocation.method(
           #updateObjBy,
-          [id],
+          [
+            objId,
+            updatedObj,
+          ],
         ),
         returnValueForMissingStub: null,
       );
