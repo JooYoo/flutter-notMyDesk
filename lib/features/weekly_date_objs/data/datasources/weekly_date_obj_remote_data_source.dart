@@ -5,14 +5,16 @@ import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
 abstract class WeeklyDateObjRemoteDataSourceProtocol {
   void uploadObjs(List<WeeklyDateObj> weeklyDateObjs);
   Future<List<WeeklyDateObj>> downloadObjs();
+  Future<Map<String, dynamic>?> fetchCollectionBy(String id);
   Future<void> deleteObjs();
-  void updateObjBy(String objId, Map<String, dynamic> updatedObj);
+  void updateCollectionBy(String objId, Map<String, dynamic> updatedObj);
 }
 
 class WeeklyDateObjRemoteDataSource
     implements WeeklyDateObjRemoteDataSourceProtocol {
   // Firestore instance
   final _db = FirebaseFirestore.instance;
+  // TODO: add collection name as a variable
 
   // Create weeklyDateObjs into Firestore
   @override
@@ -22,6 +24,7 @@ class WeeklyDateObjRemoteDataSource
     }
   }
 
+  // FIXME: rename: fetchObjs()
   // Fetch weeklyDateObjs from Firebase
   @override
   Future<List<WeeklyDateObj>> downloadObjs() async {
@@ -44,7 +47,13 @@ class WeeklyDateObjRemoteDataSource
   }
 
   @override
-  void updateObjBy(String id, Map<String, dynamic> updatedObj) {
-    _db.collection("weeklyDateObjs").doc(id).update(updatedObj);
+  Future<Map<String, dynamic>?> fetchCollectionBy(String id) async {
+    final value = await _db.collection("weeklyDateObjs").doc(id).get();
+    return value.data();
+  }
+
+  @override
+  void updateCollectionBy(String id, Map<String, dynamic> updatedCollection) {
+    _db.collection("weeklyDateObjs").doc(id).update(updatedCollection);
   }
 }

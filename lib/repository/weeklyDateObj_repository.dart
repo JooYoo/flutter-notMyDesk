@@ -15,7 +15,7 @@ class WeeklyDateObjRepository {
     // selected-weekly-dateObj id
     var selectedObjId = localSelectedWeeklyDateObj.id;
 
-    // fetch data from Firebase // TODO: move to remoteDS
+    //✅ fetch data from Firebase
     final value =
         await _db.collection("weeklyDateObjs").doc(selectedObjId).get();
     final readyUpdateObj = value.data();
