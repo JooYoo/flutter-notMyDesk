@@ -40,15 +40,15 @@ void main() {
     ];
 
     // When
-    when(remoteDSProtocol.downloadObjs())
+    when(remoteDSProtocol.fetchObjs())
         .thenAnswer((_) => Future(() => weeklyDateObjs));
 
     /// The implementation of `downloadObjs()` is inside of remoteDS,
     /// it's now mocked, including mocked data.
-    var res = await sut.downloadObjs();
+    var res = await sut.fetchObjs();
 
     // Then
-    verify(remoteDSProtocol.downloadObjs()).called(1);
+    verify(remoteDSProtocol.fetchObjs()).called(1);
     expect(res.length, 2);
   });
 

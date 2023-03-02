@@ -15,7 +15,7 @@ class GetWeeklyDateObjsUC implements GetWeeklyDateObjsUcProtocol {
   @override
   Future<List<WeeklyDateObj>> call() async {
     // Download objs from Fb
-    var weeklyDateObjs = await weeklyDateObjRepo.downloadObjs();
+    var weeklyDateObjs = await weeklyDateObjRepo.fetchObjs();
 
     // If fb is empty,
     if (weeklyDateObjs.isEmpty) {

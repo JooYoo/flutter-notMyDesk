@@ -4,7 +4,7 @@ import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
 
 abstract class WeeklyDateObjRemoteDataSourceProtocol {
   void uploadObjs(List<WeeklyDateObj> weeklyDateObjs);
-  Future<List<WeeklyDateObj>> downloadObjs();
+  Future<List<WeeklyDateObj>> fetchObjs();
   Future<Map<String, dynamic>?> fetchCollectionBy(String id);
   Future<void> deleteObjs();
   void updateCollectionBy(String objId, Map<String, dynamic> updatedObj);
@@ -24,10 +24,9 @@ class WeeklyDateObjRemoteDataSource
     }
   }
 
-  // FIXME: rename: fetchObjs()
   // Fetch weeklyDateObjs from Firebase
   @override
-  Future<List<WeeklyDateObj>> downloadObjs() async {
+  Future<List<WeeklyDateObj>> fetchObjs() async {
     final snapshot = await _db.collection("weeklyDateObjs").get();
     var weeklyDateObjs = snapshot.docs
         .map<WeeklyDateObj>((e) => WeeklyDateObj.fromSnapshot(e))
