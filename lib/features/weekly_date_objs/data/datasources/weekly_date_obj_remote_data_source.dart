@@ -5,9 +5,9 @@ import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
 abstract class WeeklyDateObjRemoteDataSourceProtocol {
   void uploadObjs(List<WeeklyDateObj> weeklyDateObjs);
   Future<List<WeeklyDateObj>> fetchObjs();
-  Future<Map<String, dynamic>?> fetchCollectionBy(String id);
   Future<void> deleteObjs();
-  void updateCollectionBy(String objId, Map<String, dynamic> updatedObj);
+  Future<Map<String, dynamic>?> fetchCollectionBy(String id);
+  void updateCollectionBy(String id, Map<String, dynamic> updatedCollection);
 }
 
 class WeeklyDateObjRemoteDataSource
