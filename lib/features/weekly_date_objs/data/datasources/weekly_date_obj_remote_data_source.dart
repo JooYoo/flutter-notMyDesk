@@ -6,8 +6,8 @@ abstract class WeeklyDateObjRemoteDataSourceProtocol {
   void uploadObjs(List<WeeklyDateObj> weeklyDateObjs);
   Future<List<WeeklyDateObj>> fetchObjs();
   Future<void> deleteObjs();
-  Future<Map<String, dynamic>?> fetchCollectionBy(String id);
-  void updateCollectionBy(String id, Map<String, dynamic> updatedCollection);
+  Future<Map<String, dynamic>?> fetchCollectionBy(String? id);
+  void updateCollectionBy(String? id, Map<String, dynamic> updatedCollection);
 }
 
 class WeeklyDateObjRemoteDataSource
@@ -46,13 +46,13 @@ class WeeklyDateObjRemoteDataSource
   }
 
   @override
-  Future<Map<String, dynamic>?> fetchCollectionBy(String id) async {
+  Future<Map<String, dynamic>?> fetchCollectionBy(String? id) async {
     final value = await _db.collection("weeklyDateObjs").doc(id).get();
     return value.data();
   }
 
   @override
-  void updateCollectionBy(String id, Map<String, dynamic> updatedCollection) {
+  void updateCollectionBy(String? id, Map<String, dynamic> updatedCollection) {
     _db.collection("weeklyDateObjs").doc(id).update(updatedCollection);
   }
 }

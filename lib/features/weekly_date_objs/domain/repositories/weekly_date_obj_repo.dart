@@ -7,8 +7,8 @@ abstract class WeeklyDateObjRepoProtocol {
   void uploadObjs(List<WeeklyDateObj> weeklyDateObjs);
   Future<List<WeeklyDateObj>> fetchObjs();
   Future<void> deleteObjs();
-  Future<Map<String, dynamic>?> fetchCollectionBy(String id);
-  void updateCollectionBy(String id, Map<String, dynamic> updatedCollection);
+  Future<Map<String, dynamic>?> fetchCollectionBy(String? id);
+  void updateCollectionBy(String? id, Map<String, dynamic> updatedCollection);
 }
 
 class WeeklyDateObjRepo implements WeeklyDateObjRepoProtocol {
@@ -33,13 +33,17 @@ class WeeklyDateObjRepo implements WeeklyDateObjRepoProtocol {
     await remoteDS.deleteObjs();
   }
 
+  // Fetch collection (key-value-pair) by id from Fb
+  // A part of updateObj
   @override
-  Future<Map<String, dynamic>?> fetchCollectionBy(String id) async {
+  Future<Map<String, dynamic>?> fetchCollectionBy(String? id) async {
     return await remoteDS.fetchCollectionBy(id);
   }
 
+  // Update collection (key-value-pair) by id, new collection to Fb
+  // A part of updateObj
   @override
-  void updateCollectionBy(String id, Map<String, dynamic> updatedCollection) {
+  void updateCollectionBy(String? id, Map<String, dynamic> updatedCollection) {
     remoteDS.updateCollectionBy(id, updatedCollection);
   }
 }
