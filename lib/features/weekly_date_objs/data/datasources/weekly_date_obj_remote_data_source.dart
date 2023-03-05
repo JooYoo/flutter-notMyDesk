@@ -14,20 +14,20 @@ class WeeklyDateObjRemoteDataSource
     implements WeeklyDateObjRemoteDataSourceProtocol {
   // Firestore instance
   final _db = FirebaseFirestore.instance;
-  // TODO: add collection name as a variable
+  final _collectionPath = "weeklyDateObjs";
 
   // Create weeklyDateObjs into Firestore
   @override
   void uploadObjs(List<WeeklyDateObj> weeklyDateObjs) {
     for (var obj in weeklyDateObjs) {
-      _db.collection("weeklyDateObjs").add(obj.toJson());
+      _db.collection(_collectionPath).add(obj.toJson());
     }
   }
 
   // Fetch weeklyDateObjs from Firebase
   @override
   Future<List<WeeklyDateObj>> fetchObjs() async {
-    final snapshot = await _db.collection("weeklyDateObjs").get();
+    final snapshot = await _db.collection(_collectionPath).get();
     var weeklyDateObjs = snapshot.docs
         .map<WeeklyDateObj>((e) => WeeklyDateObj.fromSnapshot(e))
         .toList();
@@ -38,7 +38,7 @@ class WeeklyDateObjRemoteDataSource
   @override
   Future<void> deleteObjs() async {
     // Get collection (a list of docs)
-    final snapshots = await _db.collection("weeklyDateObjs").get();
+    final snapshots = await _db.collection(_collectionPath).get();
     // Delete the docs one by one
     for (var doc in snapshots.docs) {
       await doc.reference.delete();
@@ -47,12 +47,12 @@ class WeeklyDateObjRemoteDataSource
 
   @override
   Future<Map<String, dynamic>?> fetchCollectionBy(String? id) async {
-    final value = await _db.collection("weeklyDateObjs").doc(id).get();
+    final value = await _db.collection(_collectionPath).doc(id).get();
     return value.data();
   }
 
   @override
   void updateCollectionBy(String? id, Map<String, dynamic> updatedCollection) {
-    _db.collection("weeklyDateObjs").doc(id).update(updatedCollection);
+    _db.collection(_collectionPath).doc(id).update(updatedCollection);
   }
 }
