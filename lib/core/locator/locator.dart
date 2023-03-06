@@ -6,12 +6,15 @@ import 'package:get_it/get_it.dart';
 final locator = GetIt.instance;
 
 void setup() {
+  // Data Sources
   locator.registerLazySingleton<WeeklyDateObjRemoteDataSourceProtocol>(
       () => WeeklyDateObjRemoteDataSource());
 
+  // Repositories
   locator.registerLazySingleton<WeeklyDateObjRepoProtocol>(
       () => WeeklyDateObjRepo());
 
+  // Use Cases
   locator.registerLazySingleton<GetWeeklyDateObjsUcProtocol>(
       () => GetWeeklyDateObjsUC());
 }
