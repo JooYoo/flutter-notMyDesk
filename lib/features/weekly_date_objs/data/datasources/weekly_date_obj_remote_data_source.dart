@@ -45,12 +45,16 @@ class WeeklyDateObjRemoteDataSource
     }
   }
 
+  // Fetch collection (key-value-pair) by id from Fb
+  // A part of updateObj
   @override
   Future<Map<String, dynamic>?> fetchCollectionBy(String? id) async {
     final value = await _db.collection(_collectionPath).doc(id).get();
     return value.data();
   }
 
+  // Update collection (key-value-pair) by id, new collection to Fb
+  // A part of updateObj
   @override
   void updateCollectionBy(String? id, Map<String, dynamic> updatedCollection) {
     _db.collection(_collectionPath).doc(id).update(updatedCollection);
