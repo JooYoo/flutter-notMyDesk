@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_not_my_desk/core/locator/locator.dart';
 import 'package:flutter_not_my_desk/features/weekly_date_objs/domain/usecases/get_weekly_date_objs_uc.dart';
+import 'package:flutter_not_my_desk/features/weekly_date_objs/domain/usecases/update_weekly_date_obj_uc.dart';
 import 'package:flutter_not_my_desk/models/Floor.dart';
 import 'package:flutter_not_my_desk/models/Seat.dart';
 import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
@@ -16,6 +17,7 @@ var weeklyDateObjRepository = WeeklyDateObjRepository();
 class WeeklyDateObjProvider extends ChangeNotifier {
   // Dependency Injection
   final getWeeklyDateObjsUC = locator.get<GetWeeklyDateObjsUcProtocol>();
+  final updateWeeklyDateObjUC = locator.get<UpdateWeeklyDateObjUcProtocol>();
 
   // weekly-date-objs (x7) for the current week
   // defaul: local generated data
@@ -87,14 +89,14 @@ class WeeklyDateObjProvider extends ChangeNotifier {
   }
 
   // set seat by: selected-floor, selected-seat, occupiedBy
-  Future<void> setOccupyBy(Seat selectedSeat, String newOccupiedBy) async {
+  void setOccupyBy(Seat selectedSeat, String newOccupiedBy) {
     // find target seat from
     var seat = _selectedFloor.seats
         .firstWhere((seat) => seat.deskNr == selectedSeat.deskNr);
     // set occupy
     seat.occupiedBy = newOccupiedBy;
     // update date to Firebase
-    await weeklyDateObjRepository.fbUpdateObj(_weeklyDateObjs, seat);
+    updateWeeklyDateObjUC(_weeklyDateObjs, seat);
 
     notifyListeners();
   }

@@ -109,10 +109,8 @@ class _SeatWidgetState extends State<SeatWidget> {
                             backgroundColor: Colors.black,
                             minimumSize: const Size.fromHeight(50),
                           ),
-                          onPressed: () async {
-                            await context
-                                .read<WeeklyDateObjProvider>()
-                                .setOccupyBy(
+                          onPressed: () {
+                            context.read<WeeklyDateObjProvider>().setOccupyBy(
                                   widget.seat,
                                   occupiedBy,
                                 );
