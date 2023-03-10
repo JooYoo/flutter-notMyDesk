@@ -7,7 +7,6 @@ import 'package:flutter_not_my_desk/firebase_options.dart';
 import 'package:flutter_not_my_desk/pages/about_page.dart';
 import 'package:flutter_not_my_desk/pages/home_page.dart';
 import 'package:flutter_not_my_desk/providers/weekly_date_obj_provider.dart';
-import 'package:flutter_not_my_desk/repository/weeklyDateObj_repository.dart';
 import 'package:flutter_not_my_desk/widgets/appbar_settings_button.dart';
 import 'package:flutter_not_my_desk/widgets/side_nav.dart';
 import 'package:provider/provider.dart';

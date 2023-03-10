@@ -5,14 +5,12 @@ import 'package:flutter_not_my_desk/features/weekly_date_objs/domain/usecases/up
 import 'package:flutter_not_my_desk/models/Floor.dart';
 import 'package:flutter_not_my_desk/models/Seat.dart';
 import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
-import 'package:flutter_not_my_desk/repository/weeklyDateObj_repository.dart';
 import 'package:flutter_not_my_desk/services/time_manager.dart';
 import 'package:flutter_not_my_desk/services/weekly_floor_manager.dart';
 
 final List<WeeklyDateObj> defaultWeeklyDateObjs =
     generateWeeklyDateObjs([3, 4, 5]);
 final String defaultCurrentFullDate = getCurrentFullDate();
-var weeklyDateObjRepository = WeeklyDateObjRepository();
 
 class WeeklyDateObjProvider extends ChangeNotifier {
   // Dependency Injection
