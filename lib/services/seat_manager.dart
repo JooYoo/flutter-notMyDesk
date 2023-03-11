@@ -1,5 +1,5 @@
+import 'package:flutter_not_my_desk/features/weekly_date_objs/data/models/Seat.dart';
 import 'package:flutter_not_my_desk/models/Floor.dart';
-import 'package:flutter_not_my_desk/models/Seat.dart';
 
 enum RoomSide { left, right }
 

@@ -49,15 +49,6 @@ class MockWeeklyDateObjRemoteDataSourceProtocol extends _i1.Mock
             _i4.Future<List<_i3.WeeklyDateObj>>.value(<_i3.WeeklyDateObj>[]),
       ) as _i4.Future<List<_i3.WeeklyDateObj>>);
   @override
-  _i4.Future<Map<String, dynamic>?> fetchCollectionBy(String? id) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #fetchCollectionBy,
-          [id],
-        ),
-        returnValue: _i4.Future<Map<String, dynamic>?>.value(),
-      ) as _i4.Future<Map<String, dynamic>?>);
-  @override
   _i4.Future<void> deleteObjs() => (super.noSuchMethod(
         Invocation.method(
           #deleteObjs,
@@ -67,16 +58,25 @@ class MockWeeklyDateObjRemoteDataSourceProtocol extends _i1.Mock
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
+  _i4.Future<Map<String, dynamic>?> fetchCollectionBy(String? id) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchCollectionBy,
+          [id],
+        ),
+        returnValue: _i4.Future<Map<String, dynamic>?>.value(),
+      ) as _i4.Future<Map<String, dynamic>?>);
+  @override
   void updateCollectionBy(
-    String? objId,
-    Map<String, dynamic>? updatedObj,
+    String? id,
+    Map<String, dynamic>? updatedCollection,
   ) =>
       super.noSuchMethod(
         Invocation.method(
           #updateCollectionBy,
           [
-            objId,
-            updatedObj,
+            id,
+            updatedCollection,
           ],
         ),
         returnValueForMissingStub: null,
