@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_not_my_desk/models/Floor.dart';
+import 'package:flutter_not_my_desk/features/weekly_date_objs/data/models/Floor.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'WeeklyDateObj.g.dart';

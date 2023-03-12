@@ -1,4 +1,4 @@
-import 'package:flutter_not_my_desk/models/Floor.dart';
+import 'package:flutter_not_my_desk/features/weekly_date_objs/data/models/Floor.dart';
 import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
 import 'package:flutter_not_my_desk/services/seat_manager.dart';
 import 'package:flutter_not_my_desk/services/time_manager.dart';
