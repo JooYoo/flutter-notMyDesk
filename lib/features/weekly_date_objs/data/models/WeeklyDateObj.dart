@@ -1,4 +1,5 @@
 // ignore_for_file: file_names
+// run json_serializable generator: `flutter pub run build_runner build`
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_not_my_desk/features/weekly_date_objs/data/models/Floor.dart';

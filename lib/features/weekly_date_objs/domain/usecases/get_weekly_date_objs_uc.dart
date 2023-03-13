@@ -1,6 +1,6 @@
 import 'package:flutter_not_my_desk/core/locator/locator.dart';
+import 'package:flutter_not_my_desk/features/weekly_date_objs/data/models/WeeklyDateObj.dart';
 import 'package:flutter_not_my_desk/features/weekly_date_objs/domain/repositories/weekly_date_obj_repo.dart';
-import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
 import 'package:flutter_not_my_desk/services/time_manager.dart';
 import 'package:flutter_not_my_desk/services/weekly_floor_manager.dart';
 

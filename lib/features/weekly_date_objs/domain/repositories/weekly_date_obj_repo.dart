@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_not_my_desk/core/locator/locator.dart';
 import 'package:flutter_not_my_desk/features/weekly_date_objs/data/datasources/weekly_date_obj_remote_data_source.dart';
-import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
+import 'package:flutter_not_my_desk/features/weekly_date_objs/data/models/WeeklyDateObj.dart';
 
 abstract class WeeklyDateObjRepoProtocol {
   void uploadObjs(List<WeeklyDateObj> weeklyDateObjs);

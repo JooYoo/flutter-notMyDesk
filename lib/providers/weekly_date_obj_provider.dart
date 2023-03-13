@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_not_my_desk/core/locator/locator.dart';
 import 'package:flutter_not_my_desk/features/weekly_date_objs/data/models/Floor.dart';
 import 'package:flutter_not_my_desk/features/weekly_date_objs/data/models/Seat.dart';
+import 'package:flutter_not_my_desk/features/weekly_date_objs/data/models/WeeklyDateObj.dart';
 import 'package:flutter_not_my_desk/features/weekly_date_objs/domain/usecases/get_weekly_date_objs_uc.dart';
 import 'package:flutter_not_my_desk/features/weekly_date_objs/domain/usecases/update_weekly_date_obj_uc.dart';
-import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
 import 'package:flutter_not_my_desk/services/time_manager.dart';
 import 'package:flutter_not_my_desk/services/weekly_floor_manager.dart';
 

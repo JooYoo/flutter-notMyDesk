@@ -7,7 +7,8 @@ import 'dart:async' as _i4;
 
 import 'package:flutter_not_my_desk/features/weekly_date_objs/data/datasources/weekly_date_obj_remote_data_source.dart'
     as _i2;
-import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart' as _i3;
+import 'package:flutter_not_my_desk/features/weekly_date_objs/data/models/WeeklyDateObj.dart'
+    as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint

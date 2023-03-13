@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_not_my_desk/models/WeeklyDateObj.dart';
+import 'package:flutter_not_my_desk/features/weekly_date_objs/data/models/WeeklyDateObj.dart';
 
 abstract class WeeklyDateObjRemoteDataSourceProtocol {
   void uploadObjs(List<WeeklyDateObj> weeklyDateObjs);
