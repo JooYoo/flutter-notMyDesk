@@ -4,12 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_not_my_desk/core/locator/locator.dart';
 import 'package:flutter_not_my_desk/features/weekly_date_objs/presentation/widgets/appbar_settings_button.dart';
+import 'package:flutter_not_my_desk/features/weekly_date_objs/presentation/widgets/side_nav.dart';
 import 'package:flutter_not_my_desk/firebase_options.dart';
 import 'package:flutter_not_my_desk/pages/about_page.dart';
 import 'package:flutter_not_my_desk/pages/home_page.dart';
 import 'package:flutter_not_my_desk/providers/weekly_date_obj_provider.dart';
-
-import 'package:flutter_not_my_desk/widgets/side_nav.dart';
 import 'package:provider/provider.dart';
 import 'dart:developer';
 
