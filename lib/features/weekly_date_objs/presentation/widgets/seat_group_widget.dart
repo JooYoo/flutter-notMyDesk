@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_not_my_desk/features/weekly_date_objs/data/models/Seat.dart';
-import 'package:flutter_not_my_desk/widgets/seat_widget.dart';
+import 'package:flutter_not_my_desk/features/weekly_date_objs/presentation/widgets/seat_widget.dart';
 
 class SeatGroupWidget extends StatefulWidget {
   // props
