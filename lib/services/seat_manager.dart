@@ -37,7 +37,7 @@ List<Seat> getSelectedFloorSeatsForOneRoom(
   var selectedFloorSeats = selectedFloor.seats;
 
   // get current floor left/right seats
-  var seats = selectedFloorSeats!.where(
+  var seats = selectedFloorSeats.where(
     (seat) => seat.side == roomSide.name,
   );
 
