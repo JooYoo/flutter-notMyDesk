@@ -1,6 +1,6 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_not_my_desk/providers/weekly_date_obj_provider.dart';
+import 'package:flutter_not_my_desk/features/weekly_date_objs/presentation/providers/weekly_date_obj_provider.dart';
 import 'package:flutter_not_my_desk/services/time_manager.dart';
 import 'package:provider/provider.dart';
 

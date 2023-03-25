@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_not_my_desk/features/weekly_date_objs/data/models/Seat.dart';
-import 'package:flutter_not_my_desk/providers/weekly_date_obj_provider.dart';
+import 'package:flutter_not_my_desk/features/weekly_date_objs/presentation/providers/weekly_date_obj_provider.dart';
 import 'package:provider/provider.dart';
 import 'dart:developer';
 
